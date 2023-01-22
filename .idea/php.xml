@@ -106,7 +106,6 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
       <path value="$PROJECT_DIR$/vendor/tightenco/ziggy" />
-      <path value="$PROJECT_DIR$/vendor/librenms/laravel-vue-i18n-generator" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/zbateson/mb-wrapper" />
       <path value="$PROJECT_DIR$/vendor/zbateson/mail-mime-parser" />

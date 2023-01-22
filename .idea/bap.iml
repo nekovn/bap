@@ -111,7 +111,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tightenco/ziggy" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/librenms/laravel-vue-i18n-generator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/ui" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zbateson/mb-wrapper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zbateson/mail-mime-parser" />
