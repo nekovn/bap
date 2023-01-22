@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[597],{5597:(e,t,n)=>{n.r(t),n.d(t,{default:()=>d});var a=n(118),l=["name","value"];const u={name:"HiddenElement",props:{item:{type:Object,default:null},name:{type:String,default:null},editData:{default:""}}};const d=(0,n(3744).Z)(u,[["render",function(e,t,n,u,d,c){return(0,a.openBlock)(),(0,a.createElementBlock)("input",{type:"hidden",name:n.name,value:n.editData||n.item.value},null,8,l)}]])}}]);
-//# sourceMappingURL=597.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[549],{549:(e,t,n)=>{n.r(t),n.d(t,{default:()=>s});var r=n(118);const l={name:"FooterLeft"};const s=(0,n(3744).Z)(l,[["render",function(e,t,n,l,s,o){return(0,r.openBlock)(),(0,r.createElementBlock)("div",null," Copyright © 2022 "+(0,r.toDisplayString)(this.appName)+" All Rights Reserved ",1)}]])}}]);
-//# sourceMappingURL=549.js.map

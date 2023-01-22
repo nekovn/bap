@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[312],{312:(e,t,c)=>{c.r(t),c.d(t,{default:()=>o});var n=c(118);var a=c(8042);const r={name:"FooterRight",setup:function(){return{getAccessDateTime:(0,n.computed)((function(){var e=(0,a.xE)("/");return"".concat(e.date," ").concat(e.time)}))}}};const o=(0,c(3744).Z)(r,[["render",function(e,t,c,a,r,o){return(0,n.openBlock)(),(0,n.createElementBlock)("div",null,(0,n.toDisplayString)(e.$t("global.access_time"))+"："+(0,n.toDisplayString)(a.getAccessDateTime),1)}]])}}]);
-//# sourceMappingURL=312.js.map
