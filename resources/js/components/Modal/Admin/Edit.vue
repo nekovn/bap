@@ -21,10 +21,12 @@
                                                       :name="index" :editData="editData[index]"/>
                                     <radio-element v-if="item.form?.includes('radio')" :item="item" :name="index"
                                                    :editData="editData[index]?.key"/>
+                                    <upload-file-element v-if="item.form?.includes('upload')" :item="item" :name="index"
+                                                         element="modal-edit" :editData="editData[index]"/>
                                 </form-group>
                             </div>
                             <hidden-element :item="item" :name="index" :editData="editData[index]"
-                                            v-if="item.type === 'hidden'"/>
+                                            v-if="item.isEdit && item.type === 'hidden'"/>
                         </template>
                     </form>
                 </div>
@@ -40,11 +42,33 @@
 <script>
 import {mapGetters} from "../../../store/map-state";
 import {importComponentModalForm, importComponentModalArea} from "../../../composables/Admin/useImportFile";
-const {FormGroup, InputElement, SelectElement, TextareaElement, RadioElement, DateElement, HiddenElement} = importComponentModalForm();
+
+const {
+    FormGroup,
+    InputElement,
+    SelectElement,
+    TextareaElement,
+    RadioElement,
+    DateElement,
+    HiddenElement,
+    UploadFileElement
+} = importComponentModalForm();
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 export default {
     name: "Edit",
-    components: { HiddenElement, ModalHead, ModalEmpty, ModalFooter, DateElement, RadioElement, TextareaElement, SelectElement, InputElement, FormGroup},
+    components: {
+        UploadFileElement,
+        HiddenElement,
+        ModalHead,
+        ModalEmpty,
+        ModalFooter,
+        DateElement,
+        RadioElement,
+        TextareaElement,
+        SelectElement,
+        InputElement,
+        FormGroup
+    },
     props: {
         router: {type: String, default: ''},
         editData: {default: null}

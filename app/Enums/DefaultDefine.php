@@ -18,7 +18,7 @@ class DefaultDefine extends Enum implements DefineInterface
     const ACCEPT_IMG = 'image/jpeg, image/png, image/jpg';
     const CACHE_ROOM = 'list-room';
     const EXPIRE = 10; //期限切れ
-    const CREATE_SECOND = 1; //期限切れ(180秒 -> 3分)
+    const CREATE_SECOND = 180; //期限切れ(180秒 -> 3分)
     const STATUS_SUCCESS = 200; //成功
     const STATUS_SUCCESS_202 = 202; //成功: CREATE-[POST/PUT/PATH]
     const STATUS_SUCCESS_201 = 201;
@@ -37,7 +37,7 @@ class DefaultDefine extends Enum implements DefineInterface
 
     public static function getKeyValue(): array
     {
-        $keyValue = self::getKeyValue();
+        return [];
     }
 
     public static function getMethods(): array

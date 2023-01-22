@@ -68,7 +68,7 @@ const compareData = (newData, oldData) => {
             } else {
                 arrayOldData[key] = value;
             }
-            if (arrayOldData[key] !== undefined && arrayOldData[key] !== newData[key]) {
+            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString()) {
                 notSameData[key] = newData[key];
             }
         }

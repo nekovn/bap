@@ -20,7 +20,8 @@ const importComponentModalForm = () => {
     const RadioElement = defineAsyncComponent(() => import('@modal-admin-form/RadioElement'));
     const DateElement = defineAsyncComponent(() => import('@modal-admin-form/DateElement'));
     const HiddenElement = defineAsyncComponent(() => import('@modal-admin-form/HiddenElement'));
-    return {FormGroup, InputElement, SelectElement, TextareaElement, RadioElement, DateElement, HiddenElement}
+    const UploadFileElement = defineAsyncComponent(() => import('@modal-admin-form/UploadFileElement'));
+    return {FormGroup, InputElement, SelectElement, TextareaElement, RadioElement, DateElement, HiddenElement, UploadFileElement}
 }
 
 const importComponentModalArea = () => {

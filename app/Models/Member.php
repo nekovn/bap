@@ -11,7 +11,7 @@ class Member extends Model
     use BaseModelTrait;
 
     protected $fillable = ['id', 'customer_type', 'full_name', 'gender', 'birthday', 'address', 'phone', 'email', 'account', 'password',
-        'is_block', 'remark', 'room_number', 'room_district', 'remember_token', 'email_verified_at', 'uuid', 'updated_at', 'is_delete', 'created_by'];
+        'is_block', 'remark', 'room_number', 'room_district', 'remember_token', 'email_verified_at', 'uuid', 'is_delete', 'created_by', 'updated_by'];
     protected $appends = ['button'];
     protected $primaryKey = 'id';
     protected $keyType = 'string';

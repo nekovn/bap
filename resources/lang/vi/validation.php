@@ -147,6 +147,14 @@ return [
         'is_delete'        => 'Cờ xóa',
         'keyword'          => 'Từ khóa',
         'deleteId'         => 'Tệp xóa',
+        'description'      => 'Mô tả',
+        'title'            => 'Tiêu đê',
+        'acreage'          => 'Diện tích',
+        'characteristics'  => 'Đặc điểm',
+        'hot_id'           => 'Cờ nỗi bật',
+        'district_id'      => 'Khu vực phòng',
+        'price'            => 'Giá phòng',
+        'star'             => 'Đánh giá',
 
     ],
 

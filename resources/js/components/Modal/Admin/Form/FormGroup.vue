@@ -14,7 +14,6 @@ export default {
     props: {
         required: {type: Boolean, default: false},
         label: {type: String, default: ''},
-        type: {type: String, default: ''},
     }
 }
 </script>

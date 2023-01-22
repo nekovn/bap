@@ -33,6 +33,8 @@ export default {
             "contact": "Liên hệ",
             "show_log": "Hiển thị lỗi",
             "show_log_description": "Bảng hiển thị tất cả  lỗi ở trang web",
+            "list_room": "Danh sách phòng",
+            "list_room_description": "Bảng hiển thị tất cả  danh sách phòng",
             "logout": "Đăng xuất",
             "show": "Hiển thị",
             "reply": "Trả lời",

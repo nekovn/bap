@@ -1,6 +1,6 @@
 <template>
     <div class="modal modal-blur fade show d-block" id="modal-ready" tabindex="-1" aria-modal="true" role="dialog"
-         v-if="GET_SHOW_READY_MODAL && editData"  data-action="setShowReadyModal">>
+         v-if="GET_SHOW_READY_MODAL && editData" data-action="setShowReadyModal">>
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <!-- ヘッダー -->
@@ -28,6 +28,7 @@ import {useStore} from "vuex";
 import {computed} from "vue";
 import {mapGetters} from "../../../store/map-state";
 import {importComponentModalArea} from "../../../composables/Admin/useImportFile";
+
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 export default {
     name: "ReadyOnly",
@@ -48,7 +49,7 @@ export default {
          * @return string
          */
         const showValue = (value) => {
-            if (typeof value === 'string' && value) {
+            if ((typeof value === 'string' || typeof value === 'number') && value) {
                 return value;
             } else if (typeof value === 'object' && value && value['value']) {
                 return value['value'];

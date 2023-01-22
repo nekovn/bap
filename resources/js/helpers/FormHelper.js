@@ -9,7 +9,7 @@ const getSelectedValue = (elm) => {
     let selectedVal = {};
     //Input要素
     const inputELm = elm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[type='hidden'], " +
-        "input[name='birthday']," + "input[type='tel'], input[type='radio']:checked, input[type='password'], textarea, select");
+        "input[name='birthday'], input[type='tel'], input[type='number'], input[type='radio']:checked, input[type='password'], textarea, select");
     let tmpData = {};
     let string = '';
     for (let i = 0; i < inputELm.length; i++) {

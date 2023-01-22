@@ -9,4 +9,12 @@ return [
   'password' => 'Nhập mật khẩu',
   'room_district' => 'Chọn khu vực',
   'remark' => 'Nhập ghi chú',
+  'title' => 'Nhập tiêu đề',
+  'room_image' => 'Nhập ảnh phòng',
+  'description' => 'Nhập mô tả',
+  'price' => 'Nhập giá phòng',
+  'acreage' => 'Nhập diện tích',
+  'characteristics' => 'Nhập đặc điểm',
+  'star' => 'Nhập đánh giá',
+  'room_number' => 'Nhập số phòng',
 ];

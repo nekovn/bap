@@ -87,13 +87,13 @@ class MemberRequest extends FormRequest
         //=======================account=======================//
         if (isset($data['account'])) $rules['account'] = 'required|string|min:2|max:10';
         //=======================is_block=======================//
-        if (isset($data['is_block'])) $rules['is_block'] = 'required|numeric';
+        if (isset($data['is_block'])) $rules['is_block'] = 'required|numeric|max:1';
         //=======================is_delete=======================//
-        if (isset($data['is_delete'])) $rules['is_delete'] = 'required|numeric';
+        if (isset($data['is_delete'])) $rules['is_delete'] = 'required|numeric|max:1';
         //=======================uuid=======================//
         if (isset($data['uuid'])) $rules['uuid'] = 'nullable|string|max:50';
         //=======================created_by=======================//
-        if (isset($data['created_by'])) $rules['created_by'] = 'nullable|string|max:10';
+        if (isset($data['created_by'])) $rules['created_by'] = 'nullable|string|max:15';
         //=======================room_district=======================//
         if (isset($data['room_district'])) {
             $rules['room_district'] = [
@@ -107,8 +107,9 @@ class MemberRequest extends FormRequest
                 'nullable',
                 'string',
                 'required_with:room_district',
+                // roomに関して、room_numberカラムはroom.exist_idが既存するかどうかチェックする、値：１ -> NG
                 Rule::exists('room')->where(function ($query) {
-                    return $query->where('exist', CodeDefine::INACTIVE_VALUE)
+                    return $query->where('exist_id', CodeDefine::INACTIVE_VALUE)
                         ->where('status_id', CodeDefine::ACTIVE_VALUE);
                 })
             ];
@@ -120,6 +121,8 @@ class MemberRequest extends FormRequest
                 new PasswordPolicy()
             ];
         }
+        //=======================updated_at=======================//
+        $rules['updated_at'] = 'nullable|date|max:19';
 
         return $rules;
     }

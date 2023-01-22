@@ -15,7 +15,6 @@ return [
             'type' => 'edit',
         ]
     ],
-
     'thead' => [
         'log' => [
             'id' => '<input class="form-check-input m-0 align-middle" type="checkbox" aria-label="select all">',
@@ -48,10 +47,31 @@ return [
             'updated_by' => $lang['updated_by'],
             'updated_at' => $lang['updated_at'],
             'button' => ''
-        ]
+        ],
+        'room' => [
+            'id' => '<input class="form-check-input m-0 align-middle" type="checkbox" aria-label="select all">',
+            'room_number' => $lang['room_number'],
+            'title' => $lang['title'],
+            'description' => $lang['description'],
+            'address' => $lang['address'],
+            'district_id' => $lang['district_id'],
+            'price' => $lang['price'],
+            'acreage' => $lang['acreage'],
+            'characteristics' => $lang['characteristics'],
+            'star' => $lang['star'],
+            'hot_id' => $lang['hot_id'],
+            'exist_id' => $lang['exist'],
+            'status_id' => $lang['status_id'],
+            'created_by' => $lang['created_by'],
+            'created_at' => $lang['created_at'],
+            'updated_by' => $lang['updated_by'],
+            'updated_at' => $lang['updated_at'],
+            'button' => ''
+        ],
     ],
     'filter' => [
         'log' => 'show,sort,time',
-        'member' => 'show,sort,time'
+        'member' => 'show,sort,time',
+        'room' => 'show,sort,time',
     ],
 ];

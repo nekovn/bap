@@ -1,6 +1,6 @@
 <template>
     <div class="modal modal-blur fade show d-block" id="modal-create" tabindex="-1"
-         aria-modal="true" role="dialog" v-if="GET_SHOW_CREATE_MODAL && formInput"  data-action="setShowCreateModal">
+         aria-modal="true" role="dialog" v-if="GET_SHOW_CREATE_MODAL && formInput" data-action="setShowCreateModal">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <!-- ヘッダー -->
@@ -19,9 +19,11 @@
                                     <textarea-element v-if="item.form?.includes('textarea')" :item="item"
                                                       :name="index"/>
                                     <radio-element v-if="item.form?.includes('radio')" :item="item" :name="index"/>
+                                    <upload-file-element v-if="item.form?.includes('upload')" :item="item" :name="index"
+                                                         element="modal-create"/>
                                 </form-group>
                             </div>
-                            <hidden-element :item="item" :name="index" v-if="item.type === 'hidden'"/>
+                            <hidden-element :item="item" :name="index" v-if="item.isCreate && item.type === 'hidden'"/>
                         </template>
                     </form>
                 </div>
@@ -37,12 +39,23 @@
 <script>
 import {mapGetters} from "../../../store/map-state";
 import {importComponentModalForm, importComponentModalArea} from "../../../composables/Admin/useImportFile";
-const {FormGroup, InputElement, SelectElement, TextareaElement, RadioElement, DateElement, HiddenElement} = importComponentModalForm();
+
+const {
+    FormGroup,
+    InputElement,
+    SelectElement,
+    TextareaElement,
+    RadioElement,
+    DateElement,
+    HiddenElement,
+    UploadFileElement
+} = importComponentModalForm();
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 
 export default {
     name: "Create",
     components: {
+        UploadFileElement,
         HiddenElement,
         ModalHead,
         ModalEmpty,

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Models\LogInfo;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,6 +23,10 @@ trait BaseRepositoryTrait
         DB::beginTransaction();
         try {
             DB::commit();
+            if (Auth::check()) {
+                $values['created_by'] = Auth::user()->name;
+                $values['updated_by'] = Auth::user()->name;
+            }
             return $this->getModel()->create($values);
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -48,10 +53,14 @@ trait BaseRepositoryTrait
      */
     public function update(array $values, string $id): bool
     {
-        $values['updated_by'] = Auth::check() ? Auth::user()->name : null;
-        $values['uuid'] = Str::uuid();
         DB::beginTransaction();
         try {
+            if (Auth::check()) {
+                $values['updated_by'] = Auth::user()->name;
+                $values['updated_at'] = now();
+                //ログインしたユーザーのuuidを変更する
+                Auth::user()->updateUuid();
+            }
             $model = $this->getModel();
             $model->find($id);
             $result = $model->update($values);

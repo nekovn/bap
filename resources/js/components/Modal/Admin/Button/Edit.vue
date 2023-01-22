@@ -62,13 +62,13 @@ export default {
         const getTargetData = (newData, updatedData) => {
             //idを追加する
             const id = newData['id'];
-            //uuidを追加する
-            const uuid = newData['uuid'];
+            //updated_atを追加する
+            const updated_at = newData['updated_at'];
             //フィルター属性を取得する
             let attrs = getAttrFilter(`${routerName.value}`, true, true);
             const options = {
                 id,
-                uuid,
+                updated_at,
                 ...attrs,
             }
             //変更済データ取得

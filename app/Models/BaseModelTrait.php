@@ -15,9 +15,6 @@ trait BaseModelTrait
         parent::boot();
 
         static::creating(function ($model) {
-            if (Auth::check() && isset($model->created_by)) {
-                $model->created_by = Auth::user()->name;
-            }
             if (isset($model->uuid)) {
                 $model->uuid = Str::uuid();
             }

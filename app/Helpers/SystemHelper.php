@@ -72,7 +72,8 @@ class SystemHelper implements SystemHelperInterface
             //パスフレーズ
             $passphrase = "{$secretKey}-{$publicKey}";
             $decrypt = SystemHelper::decrypt($decode['qer'], $passphrase, $decode['adf'], $bearer);
-            return !is_null($decrypt) ? json_decode($decrypt, true) : [];
+            $decrypt = json_decode($decrypt, true);
+            return !is_null($decrypt) ? $decrypt : [];
         } else {
             return [];
         }

@@ -10,7 +10,7 @@ final class CodeDefine extends Enum implements DefineInterface
     const ACTIVE_VALUE = 1;
     const INACTIVE_VALUE = 0;
     const CODE_DISTRICT = 101;
-    const CODE_ROOM = 102;
+    const CODE_ROOM_EXIST = 102;
     const CODE_STAR = 103;
     const CODE_HOT = 104;
     const CODE_STATUS = 105;

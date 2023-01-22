@@ -7,6 +7,7 @@ use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 
 class User extends Authenticatable implements CanResetPassword
@@ -51,4 +52,9 @@ class User extends Authenticatable implements CanResetPassword
         $this->save();
     }
 
+    public function updateUuid()
+    {
+        $this->uuid = Str::uuid();
+        $this->save();
+    }
 }

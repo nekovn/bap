@@ -35,7 +35,7 @@ class CrudController extends FilterController implements CrudInterface
         if (!$this->isContinuous($column)) {
             //クライアントにレスポンスErrorを返す
             return SystemHelper::response(DefaultDefine::STATUS_NO_CONTENT, __('messages.errors_modifier'));
-        } else if (!$this->isExclusiveUpdate($validatedData['id'], $validatedData['uuid'])) {
+        } else if (!$this->isExclusiveUpdate($validatedData['id'], $validatedData['updated_at'])) {
             //最新データを返す (排他更新チェック)
             $newData = $this->removeCacheAndReturnResult($conditions, $requestData);
             //クライアントにレスポンスErrorを返す

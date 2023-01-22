@@ -117,19 +117,19 @@ trait CrudTrait
 
     /**
      * 排他更新チェック
-     * @param $oldUuid
+     * @param $old
      * @param $id
      * @return bool
      */
-    protected function isExclusiveUpdate($id, $oldUuid): bool
+    protected function isExclusiveUpdate($id, $old): bool
     {
         //条件を設定する
         $where = [['id', $id]];
-        $select = ['uuid'];
+        $select = ['updated_at'];
         //DBからデータを取得
         $store = $this->service->findByPkeyItem($where, false, $select);
         if ($store) {
-            return $oldUuid === $store['uuid'];
+            return $old === $store['updated_at'];
         } else {
             return false;
         }

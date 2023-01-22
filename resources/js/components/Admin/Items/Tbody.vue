@@ -53,14 +53,21 @@ export default {
          */
         const showTbody = (value, column) => {
             let xhtml = '';
+            let className = '';
             switch (column) {
                 case 'is_block':
                 case 'is_delete':
-                    const className = value[column]['key'] === '0' ? 'bg-success' : 'bg-danger';
+                case 'exist_id':
+                    className = (value[column]['key']).toString() === '0' ? 'bg-success' : 'bg-danger';
+                    xhtml += showStatusText(className, value[column], value['id']);
+                    break;
+                case 'status_id':
+                case 'hot_id':
+                    className = (value[column]['key']).toString() === '0' ? 'bg-secondary' : 'bg-warning';
                     xhtml += showStatusText(className, value[column], value['id']);
                     break;
                 default:
-                    if (typeof  value[column] === 'string') {
+                    if (typeof  value[column] === 'string' || typeof  value[column] === 'number') {
                         xhtml += showTextContent( value[column]);
                     } else if (typeof  value[column] === 'object' && value[column] && value[column]['value']) {
                         xhtml += showTextContent(value[column]['value']);

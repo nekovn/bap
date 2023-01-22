@@ -38,7 +38,8 @@ import {
     faTriangleExclamation,
     faIdCard,
     faFloppyDisk,
-    faPenToSquare
+    faPenToSquare,
+    faHotel
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -72,7 +73,8 @@ library.add(
     faTriangleExclamation,
     faIdCard,
     faFloppyDisk,
-    faPenToSquare
+    faPenToSquare,
+    faHotel
 )
 
 export default FontAwesomeIcon;
