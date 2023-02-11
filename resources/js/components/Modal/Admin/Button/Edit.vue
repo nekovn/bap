@@ -37,8 +37,7 @@ export default {
             //入力されたデータ取得
             const newData = getSelectedValue(idElm);
             //変更済データ取得
-            let updatedData = compareData(newData, oldData);
-            const objectKeys = Object.keys(updatedData);
+            let {updatedData, isSame} = compareData(newData, oldData);
             //画像ファイルチェック
             if (oldData?.image) {
                 //追加しないファイル
@@ -53,8 +52,8 @@ export default {
                 updatedData = {...updatedData, ...{deleteFile}, ...{addFile}};
             }
 
-            //変更済データがない時、msg出る
-            if (!objectKeys.length) {
+            //新データと元データが同じの時、msg出る
+            if (isSame) {
                 //トーストを設定する
                 store.commit('SET_TOAST', {
                     title: t('global.error'), content: t('global.data_not_change'), class: 'show bg-danger',

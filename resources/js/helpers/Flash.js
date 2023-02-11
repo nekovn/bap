@@ -58,7 +58,8 @@ const compareData = (newData, oldData) => {
     let arrayOldData = {};
     const keysNewData = Object.keys(newData);
     const lengthNewData = keysNewData.length;
-    const notSameData = {}
+    const updatedData = {};
+    let isSame = true;//新データと元データが同じの時フラグ：true
     if (lengthNewData) {
         for (let i = 0; i < lengthNewData; i++) {
             const key = keysNewData[i];
@@ -72,21 +73,26 @@ const compareData = (newData, oldData) => {
             }
             //input、radio、selectの時
             if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString() && !oldValue.length) {
-                notSameData[key] = newData[key];
+                //更新データ設定
+                updatedData[key] = newData[key];
+                //新データと元データを比べて変更したので、フラグ:false
+                isSame = false;
             }
             //checkboxの時
-            if (typeof oldValue === 'object' && oldValue.length) {
+            if (typeof oldValue === 'object' && !oldValue?.key) {
                 //選択データ比較
                 let compareCheckbox = diffArrayCheckbox(newData[key], oldValue);
                 //違うデータがあれば、
                 if (compareCheckbox.length) {
-                    //すべて選択データを取得する
-                    notSameData[key] = newData[key];
+                    //新データと元データを比べて変更したので、フラグ:false
+                    isSame = false;
                 }
+                //すべてcheckedデータを取得する
+                updatedData[key] = newData[key];
             }
         }
     }
-    return notSameData;
+    return {updatedData, isSame};
 }
 
 /**
