@@ -8,10 +8,11 @@ import store from "../store";
 const getSelectedValue = (elm) => {
     let selectedVal = {};
     //Input要素
-    const inputELm = elm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[type='hidden'], " +
-        "input[name='birthday'], input[type='tel'], input[type='number'], input[type='radio']:checked, input[type='password'], textarea, select");
+    const inputELm = elm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[type='hidden'], " + "input[name='birthday'], input[type='tel'], input[type='number'], input[type='radio']:checked, input[type='password'], textarea, select");
     let tmpData = {};
     let string = '';
+    let checkboxValue = [];
+    let tmpCheckbox = {};
     for (let i = 0; i < inputELm.length; i++) {
         const name = inputELm[i].name;
         const type = inputELm[i].type;
@@ -30,6 +31,31 @@ const getSelectedValue = (elm) => {
                 }
             }
             selectedVal[ariaLabel] = string;
+        } else if (type === 'checkbox') {
+            //Checked:onの時
+            if (inputELm[i].checked) {
+                const fileType = inputELm[i]?.dataset?.file;
+                let data = inputELm[i].value;
+                //ファイル以外の時
+                if (fileType !== 'upload-file') {
+                    //初期化の時、設定：tmp[label名] = 1; 配列：空白して一つだけ入れる
+                    if (!tmpCheckbox[ariaLabel]) {
+                        checkboxValue = [];
+                        tmpCheckbox[ariaLabel] = 1;
+                        checkboxValue.push(data);
+                    } else {
+                        //次回の時、 配列にそれぞれ入れる
+                        checkboxValue.push(data);
+                    }
+                    selectedVal[name] = checkboxValue;
+                }
+            } else {
+                //Checked:offかつ配列中にキー名：まだ、データないの時
+                if (!selectedVal[name]) {
+                    selectedVal[name] = [];
+                }
+            }
+
         } else {
             selectedVal[name] = val;
         }
@@ -38,52 +64,91 @@ const getSelectedValue = (elm) => {
 }
 
 /**
+ * ステートからアップロード画像ファイルを取得
+ * @param addedImage 画面表示用追加済画像
+ */
+const getUploadFileImage = (addedImage) => {
+    //画像ファイル取得
+    const updatedImg = store.getters.GET_UPLOAD_IMAGE;
+    let image = [];
+    if (addedImage.length && updatedImg) {
+        for (let i = 0; i < addedImage.length; i++) {
+            const idImage = addedImage[i].id;
+            if (updatedImg[idImage]) {
+                image.push(updatedImg[idImage]);
+            }
+        }
+    }
+    return image
+}
+
+/**
+ * データの２つを比較する
+ * @param newItem
+ * @param oldItem
+ */
+function diffArrayById(newItem, oldItem) {
+    let id = [];
+    let name = [];
+    for (let i = 0; i < oldItem.length; i++) {
+        const idOldItem = oldItem[i].id;
+        const nameOldItem = oldItem[i].name;
+        let match = newItem.find(item => item.id === idOldItem && item.name === nameOldItem);
+        if (!match) {
+            id.push(idOldItem);
+            name.push(nameOldItem);
+        }
+    }
+    return {id, name};
+}
+
+
+
+/**
  * 入力されたデータを表示する
  * @param elm 入力画面要素
  * @param data 入力されたデータ
  */
 const showSelectedValue = (elm, data) => {
     //Input要素
-    const inputELm = elm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[type='hidden'], " +
-        "input[name='birthday']," + "input[type='tel'], input[type='radio'], input[type='password'], textarea");
-    let tmpData = {};
-    if (data) {
-        for (let i = 0; i < inputELm.length; i++) {
-            const name = inputELm[i].name;
-            const type = inputELm[i].type;
-            const value = inputELm[i].value;
-            const ariaLabel = inputELm[i].getAttribute('aria-label');
-            const role = inputELm[i].getAttribute('role');
-            if (data[name] !== undefined) {
-                if (type === 'radio') {
-                    if (data[name] && data[name]['key'] === value) {
-                        inputELm[i].checked = true;
-                    }
-                } else if (name === 'birthday') {
-                    store.dispatch('setDatePicker', data[name]);
-                } else {
-                    inputELm[i].value = data[name];
-                }
-            } else {
-                if (type === 'tel') {
-                    let splitString = data[ariaLabel] ? data[ariaLabel].split('-') : [];
-                    if (splitString) {
-                        if (tmpData[ariaLabel]) {
-                            inputELm[i].value = splitString[tmpData[ariaLabel]];
-                            tmpData[ariaLabel] += 1;
-                        } else {
-                            inputELm[i].value = splitString[0];
-                            tmpData[ariaLabel] = 1;
-                        }
-                    }
-                } else {
-                    inputELm[i].value = '';
-                }
-            }
-        }
-    }
+    // const inputELm = elm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[type='hidden'], " + "input[name='birthday']," + "input[type='tel'], input[type='radio'], input[type='password'], textarea");
+    // let tmpData = {};
+    // if (data) {
+    //     for (let i = 0; i < inputELm.length; i++) {
+    //         const name = inputELm[i].name;
+    //         const type = inputELm[i].type;
+    //         const value = inputELm[i].value;
+    //         const ariaLabel = inputELm[i].getAttribute('aria-label');
+    //         const role = inputELm[i].getAttribute('role');
+    //         if (data[name] !== undefined) {
+    //             if (type === 'radio') {
+    //                 if (data[name] && data[name]['key'] === value) {
+    //                     inputELm[i].checked = true;
+    //                 }
+    //             } else if (name === 'birthday') {
+    //                 store.dispatch('setDatePicker', data[name]);
+    //             } else {
+    //                 inputELm[i].value = data[name];
+    //             }
+    //         } else {
+    //             if (type === 'tel') {
+    //                 let splitString = data[ariaLabel] ? data[ariaLabel].split('-') : [];
+    //                 if (splitString) {
+    //                     if (tmpData[ariaLabel]) {
+    //                         inputELm[i].value = splitString[tmpData[ariaLabel]];
+    //                         tmpData[ariaLabel] += 1;
+    //                     } else {
+    //                         inputELm[i].value = splitString[0];
+    //                         tmpData[ariaLabel] = 1;
+    //                     }
+    //                 }
+    //             } else {
+    //                 inputELm[i].value = '';
+    //             }
+    //         }
+    //     }
+    // }
 }
-
 
 const showSelectedOption = async (elm, data) => {
     //option要素
@@ -120,39 +185,42 @@ const showSelectedOption = async (elm, data) => {
 
 /**
  * 入力されたデータを削除する
- * @param idELm ID画面要素
+ * @param idElm ID画面要素
  */
-const clearValueInput = (idELm) => {
-    if (idELm) {
-        //Input要素
-        const inputELm = idELm.querySelectorAll("input[type='text'], input[type='checkbox'], input[type='email'], input[name='birthday']," + "input[type='tel'], input[type='radio'], input[type='password'], textarea, select");
-        //値を設定する
-        for (let i = 0; i < inputELm.length; i++) {
-            const isDisabled = inputELm[i].dataset?.disabled;
-            const type = inputELm[i].type;
-            const value = inputELm[i].value;
-            //ラジオ
-            if (type === 'radio') {
-                //デフォルト：true
-                if (!value) {
-                    inputELm[i].checked = true;
-                }
-            } else {
-                //非活性
-                if (isDisabled === 'true') {
-                    inputELm[i].disabled = true;
-                }
-                inputELm[i].value = '';
-                inputELm[i].checked = false;
-            }
-            //赤い枠削除
-            inputELm[i].classList.remove('is-invalid');
-            //エラーメッセージ削除
-            const parentELm = inputELm[i].parentElement.closest('[aria-label="parent"]');
-            const validMsgElm = parentELm?.querySelector('.form-hint');
-            if (validMsgElm) validMsgElm.innerHTML = '';
-        }
-    }
+const clearValueInput = (idElm) => {
+    //stateの値を削除する
+    store.commit('SET_UPLOAD_IMAGE', {});
+    store.commit('CLEAR_LIST_IMAGE');
+    // if (idElm) {
+    //     //Input要素
+    //     const inputELm = idElm.querySelectorAll("input[type='text'], input[type='file'], input[type='checkbox'], input[type='email'], input[name='birthday']," + "input[type='tel'], input[type='radio'], input[type='password'], textarea, select");
+    //     //値を設定する
+    //     for (let i = 0; i < inputELm.length; i++) {
+    //         const isDisabled = inputELm[i].dataset?.disabled;
+    //         const type = inputELm[i].type;
+    //         const value = inputELm[i].value;
+    //         //ラジオ
+    //         if (type === 'radio') {
+    //             //デフォルト：true
+    //             if (!value) {
+    //                 inputELm[i].checked = true;
+    //             }
+    //         } else {
+    //             //非活性
+    //             if (isDisabled === 'true') {
+    //                 inputELm[i].disabled = true;
+    //             }
+    //             inputELm[i].value = '';
+    //             inputELm[i].checked = false;
+    //         }
+    //         //赤い枠削除
+    //         inputELm[i].classList.remove('is-invalid');
+    //         //エラーメッセージ削除
+    //         const parentELm = inputELm[i].parentElement.closest('[aria-label="parent"]');
+    //         const validMsgElm = parentELm?.querySelector('.form-hint');
+    //         if (validMsgElm) validMsgElm.innerHTML = '';
+    //     }
+    // }
 }
 
 /**
@@ -175,7 +243,7 @@ const renderInvalidMsg = (idELm = null, data = null) => {
                     //空白枠削除
                     msgElm[i].innerHTML = '';
                     //赤い枠削除
-                    removeBorderInvalid(inputELm, idELm, nameElm);
+                    renderBorderInvalid(inputELm, idELm, nameElm, true);
                 }
             }
         }
@@ -187,40 +255,25 @@ const renderInvalidMsg = (idELm = null, data = null) => {
  * @param inputELm Input要素
  * @param idELm ID画面要素
  * @param validName 無効項目
+ * @param isRemove 赤い枠削除
  */
-const renderBorderInvalid = (inputELm = null, idELm = null, validName = null) => {
+const renderBorderInvalid = (inputELm = null, idELm = null, validName = null, isRemove = false) => {
 
-    if (inputELm?.type === 'tel' || inputELm?.type === 'number') {
+    if (inputELm?.type === 'tel' || inputELm?.type === 'number' || inputELm?.type === 'checkbox' || inputELm?.type === 'radio') {
         const multiElm = idELm.querySelectorAll(`[aria-label="${validName}"]`);
         const lengths = multiElm.length;
         if (lengths) {
             for (let i = 0; i < lengths; i++) {
-                multiElm[i].classList.add('is-invalid');
-            }
-        }
-
-    } else {
-        inputELm?.classList.add('is-invalid');
-    }
-}
-
-/**
- * 赤い枠削除
- * @param inputELm Input要素
- * @param idELm ID画面要素
- * @param validName 無効項目
- */
-const removeBorderInvalid = (inputELm = null, idELm = null, validName = null) => {
-    if (inputELm?.type === 'tel' || inputELm?.type === 'number') {
-        const multiElm = idELm.querySelectorAll(`[aria-label="${validName}"]`);
-        const lengths = multiElm.length;
-        if (lengths) {
-            for (let i = 0; i < multiElm.length; i++) {
-                multiElm[i].classList.remove('is-invalid');
+                if (inputELm?.type === 'radio') {
+                    const spanElm = multiElm[i].parentNode.children[1];
+                    isRemove ? spanElm?.classList.remove('is-invalid'): spanElm?.classList.add('is-invalid');
+                } else {
+                    isRemove ? multiElm[i]?.classList.remove('is-invalid'): multiElm[i]?.classList.add('is-invalid');
+                }
             }
         }
     } else {
-        inputELm?.classList.remove('is-invalid');
+        isRemove ? inputELm?.classList.remove('is-invalid') :inputELm?.classList.add('is-invalid');
     }
 }
 
@@ -331,6 +384,19 @@ const dispatchUpdateData = (responseData) => {
     store.dispatch('setAttrs', attrs);
 }
 
+/**
+ * 画像の形式をチェックする
+ * @param file
+ * @return {boolean}
+ */
+const checkImageFile = (file) => {
+    let extension = file.name.split('.')[file.name.split('.').length - 1];
+    extension = extension.toLowerCase();
+    const maxFileSize = 200000;
+    return (extension === 'png' || extension === 'jpg' || extension === 'jpeg') && parseInt(file.size) <= maxFileSize;
+}
+
+
 export {
     getSelectedValue,
     showSelectedValue,
@@ -338,5 +404,8 @@ export {
     renderInvalidMsg,
     preventInputWrongFormat,
     showSelectedOption,
-    handleResponseData
+    handleResponseData,
+    checkImageFile,
+    diffArrayById,
+    getUploadFileImage
 }

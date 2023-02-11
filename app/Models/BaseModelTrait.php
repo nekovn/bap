@@ -18,8 +18,9 @@ trait BaseModelTrait
             if (isset($model->uuid)) {
                 $model->uuid = Str::uuid();
             }
+            //primaryKeyのuuid生成
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = Str::uuid();
+                $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
 

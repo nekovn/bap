@@ -7,7 +7,7 @@
                 <modal-head :title="`${$t('global.create_data')}`"/>
                 <!-- コンテンツ -->
                 <div class="modal-body" v-if="formInput">
-                    <form class="row mb-3">
+                    <form class="row">
                         <template v-for="(item, index) in formInput" :key="index">
                             <div class="col-6 mb-2" v-if="item.isCreate && item.type !== 'hidden'">
                                 <form-group :label="item.title" :required="item.required" :type="item.type">
@@ -27,6 +27,8 @@
                         </template>
                     </form>
                 </div>
+                <!-- アップロード画像 -->
+                <select-image-element/>
                 <!-- データがない時 -->
                 <modal-empty :data="formInput"/>
                 <!-- フッター -->
@@ -48,7 +50,8 @@ const {
     RadioElement,
     DateElement,
     HiddenElement,
-    UploadFileElement
+    UploadFileElement,
+    SelectImageElement
 } = importComponentModalForm();
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 
@@ -59,7 +62,7 @@ export default {
         HiddenElement,
         ModalHead,
         ModalEmpty,
-        ModalFooter, DateElement, RadioElement, TextareaElement, SelectElement, InputElement, FormGroup
+        ModalFooter, DateElement, RadioElement, TextareaElement, SelectElement, InputElement, FormGroup, SelectImageElement
     },
     props: {
         router: {type: String, default: ''}

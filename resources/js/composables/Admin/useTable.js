@@ -32,6 +32,11 @@ export function useTable(attrs, props, $title, $description) {
         attrs = {...attrsDecode, room, formInput, ...newAttrs}
         //初期化する時、ステートにデータを導入する
         store.dispatch('setTbodyData', data);
+    } else {
+        //データがない時、ステートにnullを導入する
+        store.dispatch('setTbodyData', null);
+        //属性Obj結合する
+        attrs = {...attrsDecode, room, formInput}
     }
     //トースト非表示
     store.dispatch('setToast');

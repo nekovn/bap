@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Enums\CodeDefine;
 use App\Enums\DefaultDefine;
 use App\Helpers\SystemHelper;
+use App\Rules\ImageRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -29,7 +30,9 @@ class RoomRequest extends FormRequest
      */
     public function validationData(): array
     {
-        return SystemHelper::getValidationData($this);
+        $data = SystemHelper::getValidationData($this);
+        $data['addFile'] = $this->file('file');
+        return $data;
     }
 
 
@@ -54,8 +57,12 @@ class RoomRequest extends FormRequest
         if (isset($data['price'])) $rules['price'] = 'required|numeric|min:1000000|max:10000000';
         //=======================acreage=======================//
         if (isset($data['acreage'])) $rules['acreage'] = 'required|string|min:5|max:10';
-        //=======================characteristics=======================//
-        if (isset($data['characteristics'])) $rules['characteristics'] = 'required|string|min:5|max:20';
+        //=======================utility_room=======================//
+        if (isset($data['utility_room'])) $rules['utility_room'] = 'required|array|max:10';
+        //=======================space_room=======================//
+        if (isset($data['space_room'])) $rules['space_room'] = 'required|array|max:10';
+        //=======================space_share=======================//
+        if (isset($data['space_share'])) $rules['space_share'] = 'required|array|max:10';
         //=======================star=======================//
         if (isset($data['star'])) $rules['star'] = 'required|numeric|min:1|max:5';
         //=======================hot_id=======================//
@@ -85,8 +92,18 @@ class RoomRequest extends FormRequest
                 })
             ];
         }
-        //=======================room_image=======================//
-        if (isset($data['room_image'])) $rules['room_image'] = 'nullable|array|image|mimes:jpeg,png,jpg|max:1024';
+        //=======================ファイルを追加=======================//
+        if (isset($data['addFile']))  {
+            $rules['addFile'] = [
+                'array'
+            ];
+        }
+        //=======================ファイルをっ削除=======================//
+        if (isset($data['deleteFile']))  {
+            $rules['deleteFile'] = [
+                'array'
+            ];
+        }
         //=======================created_by=======================//
         if (isset($data['created_by'])) $rules['created_by'] = 'nullable|string|max:15';
         //=======================updated_by=======================//

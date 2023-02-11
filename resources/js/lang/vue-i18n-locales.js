@@ -74,6 +74,7 @@ export default {
             'loading': "Đang tải",
             'access_time': "Thời gian truy cập",
             'data_not_change': "Dữ liệu ko thay đổi",
+            'image_valid': "Hình ảnh phả̉i có định dạng PNG,JPG,JPEG </br>và có kích thước nhỏ hơn hoặc bằng 200 KB.",
             "sort_asc" : "Dữ liệu đã được xếp tăng dần",
             "sort_desc" : "Dữ liệu đã được xếp giảm dần",
         },

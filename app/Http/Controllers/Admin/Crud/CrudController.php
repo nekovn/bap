@@ -61,8 +61,7 @@ class CrudController extends FilterController implements CrudInterface
             return SystemHelper::response(DefaultDefine::STATUS_NO_CONTENT, __('messages.data_been_deleted'), $newData);
         } else {
             //削除実行
-            $result = $this->service->deleteItem(['id' => $deleteId]);
-
+            $result = $this->service->delete(['id' => $deleteId]);
             //トータル取得
             $count = ['count' => count($deleteId)];
             //クライアントにレスポンスデータを返す

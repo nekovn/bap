@@ -29,9 +29,9 @@ trait BaseServiceTrait
         return $this->repository->create($values);
     }
 
-    public function update(array $values, string $where): bool
+    public function update(array $values, string $id): bool
     {
-        return $this->repository->update($values, $where);
+        return $this->repository->update($values, $id);
     }
 
     public function getLastRow(string $column)

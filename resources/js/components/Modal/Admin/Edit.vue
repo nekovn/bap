@@ -30,6 +30,8 @@
                         </template>
                     </form>
                 </div>
+                <!-- アップロード画像 -->
+                <select-image-element :editData="editData['image']" name="old_image"/>
                 <!-- データがない時 -->
                 <modal-empty element="modal-edit" :data="formInput" :editData="editData"/>
                 <!-- フッター -->
@@ -51,7 +53,8 @@ const {
     RadioElement,
     DateElement,
     HiddenElement,
-    UploadFileElement
+    UploadFileElement,
+    SelectImageElement
 } = importComponentModalForm();
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 export default {
@@ -67,7 +70,8 @@ export default {
         TextareaElement,
         SelectElement,
         InputElement,
-        FormGroup
+        FormGroup,
+        SelectImageElement
     },
     props: {
         router: {type: String, default: ''},

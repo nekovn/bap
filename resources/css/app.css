@@ -19248,3 +19248,22 @@ Antialiasing
     top: 0;
     height: 100%;
 }
+
+.close-image {
+    --tw-bg-opacity: 1;
+    background-color: rgba(239,68,68,var(--tw-bg-opacity));
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 0.9rem;
+    margin-top: -0.25rem;
+    margin-right: -0.25rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    --tw-text-opacity: 1;
+    color: rgba(255,255,255,var(--tw-text-opacity));
+    width: 0.9rem;
+}

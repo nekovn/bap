@@ -1,11 +1,9 @@
 <template>
     <!-- Select -->
-    <select :class="item.class" :name="name" :disabled="item.disabled"
-            :data-disabled="item.disabled"
+    <select :class="item.class" :name="name" :disabled="item.disabled" :aria-label="name" :data-disabled="item.disabled"
             :data-bind="item.control?.bind" :data-method="item.control?.method" @change="handleSelect">
         <option value="" :data-disabled="item.disabled" selected>{{ item.placeholder }}</option>
-        <option v-for="(item, index) in item.value?.code_value" :key="index" :value="item.key" v-if="item.value"
-                :aria-label="name" role="option">
+        <option v-for="(item, index) in item.value?.code_value" :key="index" :value="item.key" v-if="item.value" role="option">
             {{ item.value }}
         </option>
     </select>

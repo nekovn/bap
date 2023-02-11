@@ -14,7 +14,9 @@ return [
   'description' => 'Nhập mô tả',
   'price' => 'Nhập giá phòng',
   'acreage' => 'Nhập diện tích',
-  'characteristics' => 'Nhập đặc điểm',
+  'utility_room' => "Nhập tiện ích phòng",
+  'space_room' => "Nhập không gian phòng",
+  'space_share' => "Nhập không gian chung",
   'star' => 'Nhập đánh giá',
   'room_number' => 'Nhập số phòng',
 ];

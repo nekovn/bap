@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Container;
 
 use App\Enums\CodeDefine;
 use App\Models\Code;
+use App\Models\Utilities;
 
 class DefineContainer implements DefineInterface
 {
@@ -97,7 +98,7 @@ class DefineContainer implements DefineInterface
                 ],
                 'phone' => [
                     'form' => 'input',
-                    'type' => 'phone',
+                    'type' => 'tel',
                     'placeholder' =>  __('placeholder.phone'),
                     'value' => '',
                     'class' => 'form-control',
@@ -352,17 +353,45 @@ class DefineContainer implements DefineInterface
                     'isCreate' => true,
                     'isEdit' => true
                 ],
-                'characteristics' => [
+                'utility_room' => [
                     'form' => 'input',
-                    'type' => 'text',
-                    'placeholder' => __('placeholder.characteristics'),
-                    'value' => '',
-                    'class' => 'form-control',
+                    'type' => 'checkbox',
+                    'placeholder' => __('placeholder.utility_room'),
+                    'value' => ['code_value' => Utilities::GetUtilities(CodeDefine::UTILITY_ROOM)],
+                    'class' => 'form-check',
                     'required' => true,
                     'disabled' => false,
-                    'maxlength' => '20',
+                    'maxlength' => '',
                     'control' => [],
-                    'title' => __('global.characteristics'),
+                    'title' => __('global.utility_room'),
+                    'isCreate' => true,
+                    'isEdit' => true
+                ],
+                'space_room' => [
+                    'form' => 'input',
+                    'type' => 'checkbox',
+                    'placeholder' => __('placeholder.space_room'),
+                    'value' => ['code_value' => Utilities::GetUtilities(CodeDefine::SPACE_ROOM)],
+                    'class' => 'form-check',
+                    'required' => true,
+                    'disabled' => false,
+                    'maxlength' => '',
+                    'control' => [],
+                    'title' => __('global.space_room'),
+                    'isCreate' => true,
+                    'isEdit' => true
+                ],
+                'space_share' => [
+                    'form' => 'input',
+                    'type' => 'checkbox',
+                    'placeholder' => __('placeholder.space_share'),
+                    'value' => ['code_value' => Utilities::GetUtilities(CodeDefine::SPACE_SHARE)],
+                    'class' => 'form-check',
+                    'required' => true,
+                    'disabled' => false,
+                    'maxlength' => '',
+                    'control' => [],
+                    'title' => __('global.space_share'),
                     'isCreate' => true,
                     'isEdit' => true
                 ],
@@ -377,20 +406,6 @@ class DefineContainer implements DefineInterface
                     'maxlength' => '2',
                     'control' => [],
                     'title' => __('global.star'),
-                    'isCreate' => true,
-                    'isEdit' => true
-                ],
-                'room_image' => [
-                    'form' => 'upload',
-                    'type' => '.jpg, .jpeg, .png',
-                    'placeholder' => __('placeholder.room_image'),
-                    'value' => '',
-                    'class' => 'form-control',
-                    'required' => false,
-                    'disabled' => false,
-                    'maxlength' => '1024',
-                    'control' => [],
-                    'title' => __('global.room_image'),
                     'isCreate' => true,
                     'isEdit' => true
                 ],
@@ -434,6 +449,20 @@ class DefineContainer implements DefineInterface
                     'control' => [],
                     'title' => __('global.status_id'),
                     'isCreate' => false,
+                    'isEdit' => true
+                ],
+                'file' => [
+                    'form' => 'upload',
+                    'type' => '.jpg, .jpeg, .png',
+                    'placeholder' => __('placeholder.room_image'),
+                    'value' => '',
+                    'class' => 'form-control',
+                    'required' => false,
+                    'disabled' => false,
+                    'maxlength' => '1024',
+                    'control' => [],
+                    'title' => __('global.room_image'),
+                    'isCreate' => true,
                     'isEdit' => true
                 ],
                 'updated_at' => [

@@ -62,18 +62,56 @@ const compareData = (newData, oldData) => {
     if (lengthNewData) {
         for (let i = 0; i < lengthNewData; i++) {
             const key = keysNewData[i];
-            const value = oldData[key];
-            if (typeof value === 'object') {
-                arrayOldData[key] = value?.key;
+            const oldValue = oldData[key];
+            if (typeof oldValue === 'object') {
+                if(!oldValue.length) {
+                    arrayOldData[key] = oldValue?.key;
+                }
             } else {
-                arrayOldData[key] = value;
+                arrayOldData[key] = oldValue;
             }
-            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString()) {
+            //input、radio、selectの時
+            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString() && !oldValue.length) {
                 notSameData[key] = newData[key];
+            }
+            //checkboxの時
+            if (typeof oldValue === 'object' && oldValue.length) {
+                //選択データ比較
+                let compareCheckbox = diffArrayCheckbox(newData[key], oldValue);
+                //違うデータがあれば、
+                if (compareCheckbox.length) {
+                    //すべて選択データを取得する
+                    notSameData[key] = newData[key];
+                }
             }
         }
     }
     return notSameData;
+}
+
+/**
+ * checkboxデータの２つを比較する
+ * @param newItem
+ * @param oldItem
+ */
+const diffArrayCheckbox = (newItem, oldItem) => {
+    let notSameVal = []
+    let length = newItem.length;
+    //check:onの時
+    if (length) {
+        for (let i = 0; i < length; i++) {
+            const newValue = newItem[i];
+            let match = oldItem.find(item => item.key.toString() === newValue.toString());
+            //違うデータがあれば、配列に入れる
+            if (!match) {
+                notSameVal.push(newValue)
+            }
+        }
+    } else {
+        //check:offの時
+        notSameVal = ' ';
+    }
+    return notSameVal;
 }
 
 /**
@@ -126,7 +164,6 @@ const getAttrFilter = (id, isGetShowPage = false, isGetDate = false, isLimit = t
         }
 
     }
-
     return {per_page, sort, dateStart, dateEnd, offset, isLimit, keyword};
 }
 
@@ -153,6 +190,22 @@ const getCurrentDateTime = (symbol = '', plusTime = 0) => {
     }
 }
 
+/**
+ * コンテンツリスト表示
+ * @param list
+ * @param isHidden
+ * @return string
+ */
+const showListContent = (list, isHidden = true) => {
+    const hiddenClass = isHidden ? 'hidden-text' : '';
+    let xhtml = '<ul>';
+    for (let i = 0; i < list.length; i++) {
+        xhtml += `<li class="text-muted ${hiddenClass}">${list[i].value}</li>`;
+    }
+    xhtml += '</ul>'
+    return xhtml;
+}
+
 
 export {
     handleCatchError,
@@ -160,4 +213,5 @@ export {
     compareData,
     getAttrFilter,
     getCurrentDateTime,
+    showListContent
 }

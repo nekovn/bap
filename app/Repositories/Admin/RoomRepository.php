@@ -17,7 +17,8 @@ class RoomRepository
 
     public function getModel()
     {
-        return $this->setModel()::where([])->with('districtId', 'hotId', 'existId', 'statusId');
+        return $this->setModel()::where([])
+            ->with('districtId', 'hotId', 'existId', 'statusId', 'utility_room', 'space_room', 'space_share', 'image');
     }
 
 

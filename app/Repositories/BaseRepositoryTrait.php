@@ -332,6 +332,17 @@ trait BaseRepositoryTrait
     public function delete(array $conditions = [])
     {
         $model = $this->getModel();
+        return $this->executeDelete($model, $conditions);
+    }
+
+    /**
+     * 削除実行
+     * @param $model
+     * @param $conditions
+     * @return mixed|void
+     */
+    public function executeDelete($model, $conditions)
+    {
         DB::beginTransaction();
         try {
             return $model->whereIn('id', $conditions['id'])->chunk(10, function ($model) {

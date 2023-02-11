@@ -9,7 +9,7 @@
 
 <script>
 import {computed} from "vue";
-import {getSelectedValue, handleResponseData} from "../../../../helpers/FormHelper";
+import {getSelectedValue, handleResponseData, diffArrayById, getUploadFileImage} from "../../../../helpers/FormHelper";
 import {compareData, getAttrFilter} from "../../../../helpers/Flash";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
@@ -39,6 +39,20 @@ export default {
             //変更済データ取得
             let updatedData = compareData(newData, oldData);
             const objectKeys = Object.keys(updatedData);
+            //画像ファイルチェック
+            if (oldData?.image) {
+                //追加しないファイル
+                const newData = store.getters.GET_LIST_IMAGE.filter(item => !item?.isNewFile);
+                //追加済ファイル
+                const addedData = store.getters.GET_LIST_IMAGE.filter(item => item?.isNewFile);
+                //削除済ID
+                const deleteFile = diffArrayById(newData, oldData?.image);
+                //追加済画像ファイル
+                const addFile = getUploadFileImage(addedData);
+                //パラメータ追加
+                updatedData = {...updatedData, ...{deleteFile}, ...{addFile}};
+            }
+
             //変更済データがない時、msg出る
             if (!objectKeys.length) {
                 //トーストを設定する

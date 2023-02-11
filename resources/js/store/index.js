@@ -63,10 +63,19 @@ const store = createStore({
                 //結果設定
                 let result = {};
                 //通信パラメータ
-                const postParam = {'target': setPostParam?.param};
+                let postParam = {'target': setPostParam?.param};
                 //API呼び出し
                 switch (action) {
                     case 'post':
+                        if (data?.addFile?.length) {
+                            //通信パラメータ
+                            postParam = new FormData();
+                            for (let i = 0; i < data?.addFile?.length; i++) {
+                                postParam.append("file[]", data?.addFile[i]);
+                            }
+                            postParam.append("target", setPostParam?.param);
+                            headers['content-Type'] = 'multipart/form-data;application/x-www-form-urlencoded;charset=utf-8';
+                        }
                         result = await axiosInstance.post(url, postParam, {headers});
                         break;
                     case 'get':
@@ -83,6 +92,7 @@ const store = createStore({
                 //レスポンス結果取得
                 return getters.GET_RESPONSE_DATA;
             } catch (error) {
+                console.log(error)
                 //サーバからエラー発生する時
                 return handleCatchError(commit, vi);
             }

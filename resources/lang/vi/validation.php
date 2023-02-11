@@ -114,7 +114,7 @@ return [
     'same'                 => ':attribute và :other phải giống nhau.',
     'size'                 => [
         'array'   => ':attribute phải chứa :size phần tử.',
-        'file'    => 'Dung lượng tập tin trong :attribute phải bằng :size KB.',
+        'file'    => 'Dung lượng tập tin trong :attribute phải nhỏ hơn hoặc bằng :size KB.',
         'numeric' => ':attribute phải bằng :size.',
         'string'  => ':attribute phải chứa :size kí tự.',
     ],
@@ -155,6 +155,11 @@ return [
         'district_id'      => 'Khu vực phòng',
         'price'            => 'Giá phòng',
         'star'             => 'Đánh giá',
+        'room_image'       => 'Ảnh phòng',
+        'file'             => 'Tập tin',
+        'utility_room'     => 'Tiện ích phòng',
+        'space_room'       => 'Không gian phòng',
+        'space_share'      => 'Không gian chung',
 
     ],
 

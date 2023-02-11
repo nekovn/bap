@@ -8,9 +8,10 @@
 </template>
 
 <script>
-import {getSelectedValue, handleResponseData} from "../../../../helpers/FormHelper";
+import {getSelectedValue, getUploadFileImage, handleResponseData} from "../../../../helpers/FormHelper";
 import {computed} from "vue";
 import {getAttrFilter} from "../../../../helpers/Flash";
+import {useStore} from "vuex";
 
 export default {
     name: "Save",
@@ -21,6 +22,7 @@ export default {
     },
     setup(props) {
         const {element, router} = props;
+        const store = useStore();
         //ルーター名
         const routerName = computed(() => router);
         //保存イベント
@@ -34,6 +36,13 @@ export default {
             //フィルター属性を取得する
             let attrs = getAttrFilter(`${routerName.value}`, true, true);
             data = {...data, ...attrs};
+            //追加済ファイル
+            const addedData = store.getters.GET_LIST_IMAGE.filter(item => item?.isNewFile);
+            if (addedData.length) {
+                //追加済画像ファイル
+                const addFile = getUploadFileImage(addedData);
+                data = {...data, ...{addFile}}
+            }
             //ルーティング
             const url = route(`${routerName.value}.create`);
             //返却されたレスポンスを処理する

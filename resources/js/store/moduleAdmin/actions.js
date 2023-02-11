@@ -9,7 +9,8 @@ export default {
 
     /* データを編集するAPIを呼び出す */
     async editData({dispatch}, {data = {}, url = ''}) {
-        return await dispatch('callApi', {data, url, action: 'put'});
+        const action = data?.addFile?.length ? 'post' : 'put'
+        return await dispatch('callApi', {data, url, action});
     },
 
     /* データをフィルターする */
@@ -55,7 +56,7 @@ export default {
 
     },
 
-    /* room番号を取得する */
+    /* 部屋番号を取得する */
     async getRoomNumber({commit, getters}, {target = {}}) {
         //ロードアイコンを開始する
         commit('SET_LOADING', true);
@@ -95,4 +96,21 @@ export default {
         }
     },
 
+    /* アップロード画像を設定する */
+    async setUploadImage({commit, state}, {file = {}}) {
+        const uploadImage = {...state.uploadImage, ...file};
+        commit('SET_UPLOAD_IMAGE', uploadImage);
+    },
+
+    /* 新画像リストを設定する */
+    async setListImage({commit, state}, {image = []}) {
+        const listImage = [...state.listImage, ...image];
+        commit('SET_LIST_IMAGE', listImage);
+    },
+
+    /* 元画像リストを設定する */
+    async setListImageOld({commit, state}, {image = []}) {
+        const listOldImage = [...state.oldImage, ...image];
+        commit('SET_OLD_IMAGE', listOldImage);
+    }
 }

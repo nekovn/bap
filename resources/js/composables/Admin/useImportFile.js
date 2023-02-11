@@ -21,7 +21,18 @@ const importComponentModalForm = () => {
     const DateElement = defineAsyncComponent(() => import('@modal-admin-form/DateElement'));
     const HiddenElement = defineAsyncComponent(() => import('@modal-admin-form/HiddenElement'));
     const UploadFileElement = defineAsyncComponent(() => import('@modal-admin-form/UploadFileElement'));
-    return {FormGroup, InputElement, SelectElement, TextareaElement, RadioElement, DateElement, HiddenElement, UploadFileElement}
+    const SelectImageElement = defineAsyncComponent(() => import('@modal-admin-form/SelectImageElement'));
+    return {
+        FormGroup,
+        InputElement,
+        SelectElement,
+        TextareaElement,
+        RadioElement,
+        DateElement,
+        HiddenElement,
+        UploadFileElement,
+        SelectImageElement
+    }
 }
 
 const importComponentModalArea = () => {
@@ -69,6 +80,12 @@ const importComponentLayout = () => {
     return {NavbarIcon, NavbarToggler, FooterLeft, FooterRight, HeaderDelete, HeaderCreate}
 }
 
+const importComponentInput = () => {
+    const HyphenInputElement = defineAsyncComponent(() => import('@modal-admin-form/HyphenInputElement'));
+    const CheckboxInputElement = defineAsyncComponent(() => import('@modal-admin-form/CheckboxInputElement'));
+    return {HyphenInputElement, CheckboxInputElement}
+}
+
 
 export {
     importComponentPage,
@@ -78,4 +95,5 @@ export {
     importComponentItem,
     importComponentTheme,
     importComponentLayout,
+    importComponentInput
 }

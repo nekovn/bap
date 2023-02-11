@@ -10,7 +10,7 @@
                     <template v-for="(thead,index) in theadData" :key="index">
                         <div class="col-6 mb-3" v-if="index !== 'id' && index !== 'button'">
                             <div class="label-bg">{{ thead }}</div>
-                            <div class="text-break ps-1">{{ showValue(editData[index]) }}</div>
+                            <div class="text-break ps-1" v-html="showValue(editData[index])"></div>
                         </div>
                     </template>
                 </div>
@@ -28,6 +28,7 @@ import {useStore} from "vuex";
 import {computed} from "vue";
 import {mapGetters} from "../../../store/map-state";
 import {importComponentModalArea} from "../../../composables/Admin/useImportFile";
+import {showListContent} from "../../../helpers/Flash";
 
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
 export default {
@@ -53,6 +54,8 @@ export default {
                 return value;
             } else if (typeof value === 'object' && value && value['value']) {
                 return value['value'];
+            } else if (typeof value === 'object' && value.length) {
+                return showListContent(value, false);
             } else {
                 return '';
             }

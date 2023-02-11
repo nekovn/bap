@@ -28,10 +28,10 @@ class Flash
         return preg_replace("/^(\d{4})(\d{3})(\d{3,4})$/", "$1-$2-$3", $value);
     }
 
-    static function deleteOldImage($path, $disk, $oldImage)
+    static function deleteOldImage($disk, $oldImage)
     {
         if ($oldImage) {
-            Storage::disk($disk)->delete($path . '/' . $oldImage);
+            Storage::disk($disk)->delete($oldImage);
         }
     }
 

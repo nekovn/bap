@@ -2,8 +2,11 @@
 
 namespace App\Helpers;
 
+use App\Enums\DefaultDefine;
 use App\Models\LogInfo;
+use App\Services\LocalFileUploadService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SystemHelper implements SystemHelperInterface
 {
@@ -61,7 +64,8 @@ class SystemHelper implements SystemHelperInterface
      */
     static function getValidationData($request):array
     {
-        $target = $request->input('target');
+        $requestData = $request->all();
+        $target = $requestData['target'] ?? [];
         $decode = json_decode($target, true);
         if ($decode) {
             //Bearer
@@ -88,4 +92,36 @@ class SystemHelper implements SystemHelperInterface
         return Auth::check() ? Auth::user()->uuid : '';
     }
 
+    /**
+     * 元ファイルを削除する
+     * @param $path //アドレス
+     * @param $disk //ドライバー
+     * @param $oldFileName //元ファイル名
+     * @return void
+     */
+    static function deleteOldFile($path, $disk, $oldFileName)
+    {
+        if ($oldFileName) {
+            Storage::disk($disk)->delete("$path/$oldFileName");
+        }
+
+    }
+
+    static function handleFileUpload(array $files): array
+    {
+        $arrImg = [];
+        $path = DefaultDefine::IMAGE_ROOM_PATH;
+        $disk = DefaultDefine::IMAGE_DISK_PATH;
+        if ($files) {
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    $fileName = (new LocalFileUploadService($file))
+                                ->save($path, $disk)
+                                ->getFileName($path);
+                    $arrImg[]['name'] = $fileName;
+                }
+            }
+        }
+        return $arrImg;
+    }
 }

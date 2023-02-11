@@ -40,4 +40,11 @@ interface SystemHelperInterface
      * @return void
      */
     static function log(array $exception, string $method, string $line, string $region);
+
+    /**
+     * ファイルアップロード
+     * @param array $files
+     * @return array
+     */
+    static function handleFileUpload(array $files): array;
 }

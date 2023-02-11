@@ -12,10 +12,11 @@ class DefaultDefine extends Enum implements DefineInterface
     const SORT_DESC = 'DESC';
     const SORT_ASC = 'ASC';
     const IMAGE_PATH = 'images/banner';
-    const IMAGE_ROOM_PATH = 'images/room';
+    const IMAGE_ROOM_PATH = '/assets/img/room/';
     const IMAGE_CUSTOMER_PATH = 'images/client';
     const IMAGE_DISK_PATH = 'storage_image';
-    const ACCEPT_IMG = 'image/jpeg, image/png, image/jpg';
+    const ACCEPT_IMG = 'jpeg,png,jpg';
+    const ACCEPT_IMG_SIZE = '900';
     const CACHE_ROOM = 'list-room';
     const EXPIRE = 10; //期限切れ
     const CREATE_SECOND = 180; //期限切れ(180秒 -> 3分)

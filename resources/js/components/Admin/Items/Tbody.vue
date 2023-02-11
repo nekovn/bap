@@ -31,6 +31,7 @@
 <script>
 import {reactive, computed} from "vue";
 import {useStore} from "vuex";
+import {showListContent} from "../../../helpers/Flash";
 
 export default {
     name: "Tbody",
@@ -54,7 +55,7 @@ export default {
         const showTbody = (value, column) => {
             let xhtml = '';
             let className = '';
-            switch (column) {
+            switch (column && value[column]) {
                 case 'is_block':
                 case 'is_delete':
                 case 'exist_id':
@@ -71,6 +72,8 @@ export default {
                         xhtml += showTextContent( value[column]);
                     } else if (typeof  value[column] === 'object' && value[column] && value[column]['value']) {
                         xhtml += showTextContent(value[column]['value']);
+                    } else if (typeof value[column] === 'object' && value[column]?.length) {
+                        xhtml += showListContent(value[column]);
                     }
                     break;
             }
@@ -98,23 +101,6 @@ export default {
          */
         const showTextContent = (attribute) => {
             return `<span class='text-muted hidden-text' title='${attribute}'>${attribute}</span>`;
-        }
-
-        /**
-         * リスト
-         * @param attribute
-         * @return {string}
-         */
-        const showListElement = (attribute) => {
-            let xhtml = '<td><ul>';
-            const objKeys = Object.keys(attribute);
-            if (objKeys.length) {
-                for (let i = 0; i < objKeys.length; i++) {
-                    xhtml += `<li class='text-muted'>${attribute[objKeys[i]]}</li>`;
-                }
-            }
-            xhtml += '</ul></td>';
-            return xhtml;
         }
 
         /**

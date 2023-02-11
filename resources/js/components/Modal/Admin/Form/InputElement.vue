@@ -1,6 +1,8 @@
 <template>
     <!-- Phone Input -->
-    <hyphen-input-element v-if="name === 'phone'" :item="item" :name="name" :value="editData"/>
+    <hyphen-input-element v-if="item.type === 'tel'" :item="item" :name="name" :value="editData"/>
+    <!-- Checkbox -->
+    <checkbox-input-element v-else-if="item.type === 'checkbox'" :item="item" :name="name" :editData="editData"/>
     <!-- 普通 Input -->
     <div v-else>
         <input :type="item.type" :name="name" :class="item.class" :maxlength="item.maxlength" :disabled="item.disabled"
@@ -12,13 +14,13 @@
 </template>
 
 <script>
-import HyphenInputElement from "./HyphenInputElement";
 import {onMounted} from "vue";
 import {preventInputWrongFormat} from "../../../../helpers/FormHelper";
-
+import {importComponentInput} from "../../../../composables/Admin/useImportFile";
+const {HyphenInputElement, CheckboxInputElement} = importComponentInput();
 export default {
     name: "InputElement",
-    components: {HyphenInputElement},
+    components: {CheckboxInputElement, HyphenInputElement},
     props: {
         item: {type: Object, default: null},
         name: {type: String, default: null},

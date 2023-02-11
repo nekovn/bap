@@ -46,7 +46,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
             Route::match(['get', 'post'],'search', 'MemberController@search')->name('member.search');
             Route::match(['get', 'post'],'delete', 'MemberController@delete')->name('member.delete');
             Route::match(['get', 'post'],'create', 'MemberController@create')->name('member.create');
-            Route::match(['get', 'put'],'edit', 'MemberController@edit')->name('member.edit');
+            Route::match(['get', 'post', 'put'],'edit', 'MemberController@edit')->name('member.edit');
         });
         //Room表示
         Route::group(['prefix' => 'room'], function () {
@@ -55,7 +55,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
             Route::match(['get', 'post'],'search', 'RoomController@search')->name('room.search');
             Route::match(['get', 'post'],'delete', 'RoomController@delete')->name('room.delete');
             Route::match(['get', 'post'],'create', 'RoomController@create')->name('room.create');
-            Route::match(['get', 'put'],'edit', 'RoomController@edit')->name('room.edit');
+            Route::match(['get', 'post', 'put'],'edit', 'RoomController@edit')->name('room.edit');
         });
     });
 });
