@@ -25,6 +25,78 @@ class DefineContainer implements DefineInterface
     public function getInputForm(): array
     {
         return [
+            'define-user' => [
+                'code' => [
+                    'form' => 'input',
+                    'type' => 'text',
+                    'placeholder' => __('placeholder.code'),
+                    'value' => '',
+                    'class' => 'form-control',
+                    'required' => true,
+                    'disabled' => false,
+                    'maxlength' => '50',
+                    'control' => [],
+                    'title' => __('global.code'),
+                    'isCreate' => true,
+                    'isEdit' => true
+                ],
+                'name' => [
+                    'form' => 'input',
+                    'type' => 'text',
+                    'placeholder' => __('placeholder.full_name'),
+                    'value' => '',
+                    'class' => 'form-control',
+                    'required' => true,
+                    'disabled' => false,
+                    'maxlength' => '50',
+                    'control' => [],
+                    'title' => __('global.full_name'),
+                    'isCreate' => true,
+                    'isEdit' => true
+                ],
+                'updated_at' => [
+                    'form' => 'input',
+                    'type' => 'hidden',
+                    'placeholder' => '',
+                    'value' => '',
+                    'class' => '',
+                    'required' => false,
+                    'disabled' => false,
+                    'maxlength' => '19',
+                    'control' => [],
+                    'title' => '',
+                    'isCreate' => false,
+                    'isEdit' => true
+                ],
+                'uuid' => [
+                    'form' => 'input',
+                    'type' => 'hidden',
+                    'placeholder' => '',
+                    'value' => '',
+                    'class' => '',
+                    'required' => false,
+                    'disabled' => false,
+                    'maxlength' => '40',
+                    'control' => [],
+                    'title' => '',
+                    'isCreate' => true,
+                    'isEdit' => false
+                ],
+                'id' => [
+                    'form' => 'input',
+                    'type' => 'hidden',
+                    'placeholder' => '',
+                    'value' => '',
+                    'class' => '',
+                    'required' => false,
+                    'disabled' => false,
+                    'maxlength' => '50',
+                    'control' => [],
+                    'title' => '',
+                    'isCreate' => true,
+                    'isEdit' => true
+                ]
+            ],
             'define-member' => [
                 'customer_type' => [
                     'form' => 'radio',

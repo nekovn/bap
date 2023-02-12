@@ -24,6 +24,17 @@ return [
             'created_at' => $lang['date_time'],
             'button' => ''
         ],
+        'user' => [
+            'id' => '<input class="form-check-input m-0 align-middle" type="checkbox" aria-label="select all">',
+            'code' => $lang['code'],
+            'name' => $lang['full_name'],
+            'email' => $lang['email'],
+            'created_by' => $lang['created_by'],
+            'created_at' => $lang['created_at'],
+            'updated_by' => $lang['updated_by'],
+            'updated_at' => $lang['updated_at'],
+            'button' => ''
+        ],
         'member' => [
             'id' => '<input class="form-check-input m-0 align-middle" type="checkbox" aria-label="select all">',
             'customer_type' => $lang['customer_type'],
@@ -73,8 +84,9 @@ return [
         ],
     ],
     'filter' => [
-        'log' => 'show,sort,time',
+        'user' => 'show,sort,time',
         'member' => 'show,sort,time',
         'room' => 'show,sort,time',
+        'log' => 'show,sort,time',
     ],
 ];

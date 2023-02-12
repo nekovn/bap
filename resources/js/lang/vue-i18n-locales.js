@@ -62,6 +62,8 @@ export default {
             "yes": "Có",
             "page": "trang",
             "select": "Chọn",
+            "user": "Quản trị viên",
+            "user_description": "Bảng hiển thị tất cả  quản trị viên đã đăng ký",
             "member": "Thành viên",
             "member_description": "Bảng hiển thị tất cả  thành viên đã đăng ký",
             "confirm": "Bạn có chắc không?",

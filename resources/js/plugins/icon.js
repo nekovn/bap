@@ -40,7 +40,8 @@ import {
     faFloppyDisk,
     faPenToSquare,
     faHotel,
-    faXmark
+    faXmark,
+    faUserSecret
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -76,7 +77,8 @@ library.add(
     faFloppyDisk,
     faPenToSquare,
     faHotel,
-    faXmark
+    faXmark,
+    faUserSecret
 )
 
 export default FontAwesomeIcon;

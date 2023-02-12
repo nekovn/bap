@@ -34,6 +34,7 @@ export default {
             routeList: [
                 {'name': this.$t('global.home'), 'url': '/', 'icon': 'house-user'}, //Home
                 {'name': this.$t('global.dashboard'), 'url': '/admin/dashboard', 'icon': 'chart-line'}, //Dashboard
+                {'name': this.$t('global.user'), 'url': '/admin/user', 'icon': 'user-secret'}, //User
                 {'name': this.$t('global.member'), 'url': '/admin/member', 'icon': 'id-card'}, //Member
                 {'name': this.$t('global.list_room'), 'url': '/admin/room', 'icon': 'hotel'}, //List room
                 {'name': this.$t('global.show_log'), 'url': '/admin/show-log', 'icon': 'bug'}, //Show log

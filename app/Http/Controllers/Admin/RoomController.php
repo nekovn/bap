@@ -33,9 +33,9 @@ class RoomController extends CrudController
     protected $thead = [];
     protected $filter = '';
 
-    public function __construct(RoomService $logService)
+    public function __construct(RoomService $roomService)
     {
-        $this->service = $logService;
+        $this->service = $roomService;
         $this->service->repository->screen = $this->screen;
         $this->thead = config('admin.page.page-setting.thead.room');
         $this->filter = config('admin.page.page-setting.filter.room');

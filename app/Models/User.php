@@ -17,11 +17,18 @@ class User extends Authenticatable implements CanResetPassword
     use MustVerifyEmail, Notifiable;
 
     protected $guarded = ['created_at', 'updated_at'];
-
     protected $hidden = ['password', 'remember_token'];
-
     protected $casts = ['email_verified_at' => 'datetime', 'two_factor_expires_at' => 'datetime'];
+    protected $appends = ['button'];
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
 
+    public function getButtonAttribute()
+    {
+        $btnSee = config('admin.page.page-setting.button.see');
+        $btnEdit = config('admin.page.page-setting.button.edit');
+        return ['see' => $btnSee, 'edit' => $btnEdit];
+    }
 
     public function sendEmailTwoFactorNotification()
     {

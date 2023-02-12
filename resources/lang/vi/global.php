@@ -35,6 +35,7 @@ return [
     "star" => "Đánh giá",
     "room_image" => "Ảnh phòng",
     "district_id" => "Khu vực phòng",
+    "code" => "Mã số",
     "hot_id" => "Cờ nỗi bật",
     "exist" => "Cờ tồn tại",
     "status_id" => "Cờ hiển thị",

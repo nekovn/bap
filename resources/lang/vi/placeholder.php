@@ -19,4 +19,5 @@ return [
   'space_share' => "Nhập không gian chung",
   'star' => 'Nhập đánh giá',
   'room_number' => 'Nhập số phòng',
+  'code' => 'Nhập mã số',
 ];

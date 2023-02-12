@@ -39,6 +39,15 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin'], fu
             Route::match(['get', 'post'],'search', 'ShowLogController@search')->name('log.search');
             Route::match(['get', 'post'],'delete', 'ShowLogController@delete')->name('log.delete');
         });
+        //User表示
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('', 'UserController@index')->name('user.index');
+            Route::post('', 'UserController@filter')->name('user.filter');
+            Route::match(['get', 'post'],'search', 'UserController@search')->name('user.search');
+            Route::match(['get', 'post'],'delete', 'UserController@delete')->name('user.delete');
+            Route::match(['get', 'post'],'create', 'UserController@create')->name('user.create');
+            Route::match(['get', 'post', 'put'],'edit', 'UserController@edit')->name('user.edit');
+        });
         //Member表示
         Route::group(['prefix' => 'member'], function () {
             Route::get('', 'MemberController@index')->name('member.index');
