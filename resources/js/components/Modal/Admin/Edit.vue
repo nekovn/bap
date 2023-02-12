@@ -14,7 +14,7 @@
                                     <input-element v-if="item.form?.includes('input')" :item="item" :name="index"
                                                    element="modal-edit" :editData="editData[index]"/>
                                     <select-element v-if="item.form?.includes('select')" :item="item" :name="index"
-                                                    element="modal-edit"/>
+                                                    element="modal-edit" :editData="editData[index]?.key"/>
                                     <date-element v-if="item.form?.includes('date')" :item="item" :name="index"
                                                   :editData="editData[index]"/>
                                     <textarea-element v-if="item.form?.includes('textarea')" :item="item"
@@ -31,7 +31,7 @@
                     </form>
                 </div>
                 <!-- アップロード画像 -->
-                <select-image-element :editData="editData['image']" name="old_image"/>
+                <select-image-element :editData="editData['image']"/>
                 <!-- データがない時 -->
                 <modal-empty element="modal-edit" :data="formInput" :editData="editData"/>
                 <!-- フッター -->

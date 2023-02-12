@@ -10,7 +10,7 @@
                        role="checkbox" :data-id="val['id']">
             </td>
             <!--  普通カラム  -->
-            <td v-html="showTbody(val, columnName)" v-else-if="columnName !== 'id' && columnName !== 'button'"></td>
+            <td v-html="showTbody(val, columnName)" v-else-if="columnName !== 'id' && columnName !== 'image' && columnName !== 'button'"></td>
             <!--  ボタン  -->
             <td v-else-if="columnName === 'button'">
                 <template v-for="(btn,type) in val['button']" :key="type">

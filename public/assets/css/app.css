@@ -19019,3 +19019,9 @@ Antialiasing
     width: 0.9rem;
 }
 
+.over-scroll-y {
+    height: 3rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+

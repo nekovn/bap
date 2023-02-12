@@ -38,6 +38,11 @@ export default {
             const newData = getSelectedValue(idElm);
             //変更済データ取得
             let {updatedData, isSame} = compareData(newData, oldData);
+            console.log(isSame);
+            //削除済ID
+            let deleteFile = [];
+            //追加済画像ファイル
+            let addFile = [];
             //画像ファイルチェック
             if (oldData?.image) {
                 //追加しないファイル
@@ -45,15 +50,28 @@ export default {
                 //追加済ファイル
                 const addedData = store.getters.GET_LIST_IMAGE.filter(item => item?.isNewFile);
                 //削除済ID
-                const deleteFile = diffArrayById(newData, oldData?.image);
+                deleteFile = diffArrayById(newData, oldData?.image);
                 //追加済画像ファイル
-                const addFile = getUploadFileImage(addedData);
+                addFile = getUploadFileImage(addedData);
                 //パラメータ追加
                 updatedData = {...updatedData, ...{deleteFile}, ...{addFile}};
             }
+            //データを通信する
+            executeSendData(isSame, deleteFile?.id?.length, addFile?.length, newData, updatedData, idElm)
+        }
 
+        /**
+         * データを通信する
+         * @param isSame
+         * @param lengthDeleteFile
+         * @param lendAddFile
+         * @param newData
+         * @param updatedData
+         * @param idElm
+         */
+        const executeSendData = (isSame, lengthDeleteFile, lendAddFile, newData, updatedData, idElm) => {
             //新データと元データが同じの時、msg出る
-            if (isSame) {
+            if (isSame && !lengthDeleteFile && !lendAddFile) {
                 //トーストを設定する
                 store.commit('SET_TOAST', {
                     title: t('global.error'), content: t('global.data_not_change'), class: 'show bg-danger',

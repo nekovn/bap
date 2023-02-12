@@ -19267,3 +19267,9 @@ Antialiasing
     color: rgba(255,255,255,var(--tw-text-opacity));
     width: 0.9rem;
 }
+
+.over-scroll-y {
+    height: 3rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

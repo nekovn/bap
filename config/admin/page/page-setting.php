@@ -60,6 +60,7 @@ return [
             'utility_room' => $lang['utility_room'],
             'space_room' => $lang['space_room'],
             'space_share' => $lang['space_share'],
+            'image' => $lang['image_room'],
             'star' => $lang['star'],
             'hot_id' => $lang['hot_id'],
             'exist_id' => $lang['exist'],

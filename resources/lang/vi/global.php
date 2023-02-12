@@ -31,6 +31,7 @@ return [
     "utility_room" => "Tiện ích phòng",
     "space_room" => "Không gian phòng",
     "space_share" => "Không gian chung",
+    "image_room" => "Ảnh phòng",
     "star" => "Đánh giá",
     "room_image" => "Ảnh phòng",
     "district_id" => "Khu vực phòng",

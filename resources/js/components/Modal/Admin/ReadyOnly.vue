@@ -10,7 +10,10 @@
                     <template v-for="(thead,index) in theadData" :key="index">
                         <div class="col-6 mb-3" v-if="index !== 'id' && index !== 'button'">
                             <div class="label-bg">{{ thead }}</div>
-                            <div class="text-break ps-1" v-html="showValue(editData[index])"></div>
+                            <div class="text-break ps-1" v-html="showValue(editData[index])" v-if="index !== 'image'"></div>
+                            <div class="text-break ps-1 row" v-if="index === 'image'">
+                                <image-light-box :editData="editData[index]" @show="show"/>
+                            </div>
                         </div>
                     </template>
                 </div>
@@ -21,29 +24,38 @@
             </div>
         </div>
     </div>
+    <!-- 画像表示 -->
+    <vue-easy-lightbox
+        :visible="visibleRef"
+        :imgs="imgsRef"
+        :index="indexRef"
+        @hide="onHide"
+    />
 </template>
 
 <script>
+import VueEasyLightbox, { useEasyLightbox } from 'vue-easy-lightbox'
+import 'vue-easy-lightbox/external-css/vue-easy-lightbox.css'
 import {useStore} from "vuex";
 import {computed} from "vue";
 import {mapGetters} from "../../../store/map-state";
-import {importComponentModalArea} from "../../../composables/Admin/useImportFile";
+import {importComponentModalArea, importComponentModalForm} from "../../../composables/Admin/useImportFile";
 import {showListContent} from "../../../helpers/Flash";
-
 const {ModalFooter, ModalEmpty, ModalHead} = importComponentModalArea();
+const {ImageLightBox} = importComponentModalForm();
 export default {
     name: "ReadyOnly",
-    components: {ModalHead, ModalEmpty, ModalFooter},
+    components: {ImageLightBox, ModalHead, ModalEmpty, ModalFooter, VueEasyLightbox},
     props: {
         editData: {default: null}
     },
     setup() {
         const store = useStore();
         const {GET_SHOW_READY_MODAL} = mapGetters();
+        //Thead取得
         const theadData = computed(() => {
             return store.getters.GET_THEAD_DATA
         });
-
         /**
          * 値表示する
          * @param value
@@ -54,14 +66,26 @@ export default {
                 return value;
             } else if (typeof value === 'object' && value && value['value']) {
                 return value['value'];
-            } else if (typeof value === 'object' && value.length) {
+            } else if (typeof value === 'object' && value?.length) {
                 return showListContent(value, false);
             } else {
                 return '';
             }
         }
-
-        return {theadData, showValue, GET_SHOW_READY_MODAL}
+        //ライトボックス
+        const {
+            //methods
+            onHide,
+            // refs
+            visibleRef, indexRef, imgsRef
+        } = useEasyLightbox();
+        //画像表示イベント
+        const show = (data) => {
+            indexRef.value = data.index
+            visibleRef.value = true
+            imgsRef.value = data.image
+        }
+        return {theadData, showValue, GET_SHOW_READY_MODAL, visibleRef, indexRef, imgsRef, show, onHide}
     }
 }
 </script>

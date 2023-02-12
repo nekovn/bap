@@ -23,6 +23,7 @@ mix.webpackConfig({
             '@modal-admin-area': path.resolve(__dirname, 'resources/js/components/Modal/Admin/Area'),
             '@modal-admin-button': path.resolve(__dirname, 'resources/js/components/Modal/Admin/Button'),
             '@admin-item': path.resolve(__dirname, 'resources/js/components/Admin/Items'),
+            'vue-easy-lightbox$': 'vue-easy-lightbox/dist/external-css/vue-easy-lightbox.esm.min.js'
         }
     },
 });

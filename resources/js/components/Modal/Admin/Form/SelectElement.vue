@@ -2,8 +2,9 @@
     <!-- Select -->
     <select :class="item.class" :name="name" :disabled="item.disabled" :aria-label="name" :data-disabled="item.disabled"
             :data-bind="item.control?.bind" :data-method="item.control?.method" @change="handleSelect">
-        <option value="" :data-disabled="item.disabled" selected>{{ item.placeholder }}</option>
-        <option v-for="(item, index) in item.value?.code_value" :key="index" :value="item.key" v-if="item.value" role="option">
+        <option value="" :data-disabled="item.disabled">{{ item.placeholder }}</option>
+        <option v-for="(item, index) in item.value?.code_value" :key="index" :value="item.key" v-if="item.value"
+                role="option" :selected="editData === item.key">
             {{ item.value }}
         </option>
     </select>
@@ -14,12 +15,14 @@
 <script>
 import {useStore} from "vuex";
 import {selectItemBind} from "../../../../helpers/Flash";
+
 export default {
     name: "SelectElement",
     props: {
         item: {type: Object, default: null},
         name: {type: String, default: null},
         element: {type: String, default: ''},
+        editData: {default: ''},
     },
     setup(props) {
         const {element} = props;

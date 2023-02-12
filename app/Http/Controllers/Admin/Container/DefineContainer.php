@@ -239,6 +239,20 @@ class DefineContainer implements DefineInterface
                     'isCreate' => false,
                     'isEdit' => true
                 ],
+                'uuid' => [
+                    'form' => 'input',
+                    'type' => 'hidden',
+                    'placeholder' => '',
+                    'value' => '',
+                    'class' => '',
+                    'required' => false,
+                    'disabled' => false,
+                    'maxlength' => '40',
+                    'control' => [],
+                    'title' => '',
+                    'isCreate' => true,
+                    'isEdit' => false
+                ],
                 'id' => [
                     'form' => 'input',
                     'type' => 'hidden',
@@ -252,7 +266,7 @@ class DefineContainer implements DefineInterface
                     'title' => '',
                     'isCreate' => true,
                     'isEdit' => true
-                ],
+                ]
             ],
             'define-room' => [
                 'room_number' => [

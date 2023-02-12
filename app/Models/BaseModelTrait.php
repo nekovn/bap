@@ -28,7 +28,7 @@ trait BaseModelTrait
             if (isset($model->room_number) && isset($model->room_district)) {
                 if ($model->room_number && $model->room_district) {
                     Room::where(['district_id' => $model->room_district, 'room_number' => $model->room_number])
-                        ->update(['exist' => CodeDefine::INACTIVE_VALUE]);
+                        ->update(['exist_id' => CodeDefine::INACTIVE_VALUE]);
                 }
             }
         });

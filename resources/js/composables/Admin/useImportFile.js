@@ -22,6 +22,7 @@ const importComponentModalForm = () => {
     const HiddenElement = defineAsyncComponent(() => import('@modal-admin-form/HiddenElement'));
     const UploadFileElement = defineAsyncComponent(() => import('@modal-admin-form/UploadFileElement'));
     const SelectImageElement = defineAsyncComponent(() => import('@modal-admin-form/SelectImageElement'));
+    const ImageLightBox = defineAsyncComponent(() => import('@modal-admin-form/ImageLightBox'));
     return {
         FormGroup,
         InputElement,
@@ -31,7 +32,8 @@ const importComponentModalForm = () => {
         DateElement,
         HiddenElement,
         UploadFileElement,
-        SelectImageElement
+        SelectImageElement,
+        ImageLightBox
     }
 }
 

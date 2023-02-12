@@ -22,7 +22,6 @@ import {useStore} from "vuex";
 export default {
     name: "SelectImageElement",
     props: {
-        name: {type: String, default: null},
         editData: {default: []},
     },
     setup(props) {

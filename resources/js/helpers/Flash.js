@@ -72,7 +72,7 @@ const compareData = (newData, oldData) => {
                 arrayOldData[key] = oldValue;
             }
             //input、radio、selectの時
-            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString() && !oldValue.length) {
+            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString()) {
                 //更新データ設定
                 updatedData[key] = newData[key];
                 //新データと元データを比べて変更したので、フラグ:false
@@ -204,7 +204,8 @@ const getCurrentDateTime = (symbol = '', plusTime = 0) => {
  */
 const showListContent = (list, isHidden = true) => {
     const hiddenClass = isHidden ? 'hidden-text' : '';
-    let xhtml = '<ul>';
+    const scrollClass = isHidden ? 'over-scroll-y' : '';
+    let xhtml = `<ul class="${scrollClass}">`;
     for (let i = 0; i < list.length; i++) {
         xhtml += `<li class="text-muted ${hiddenClass}">${list[i].value}</li>`;
     }
