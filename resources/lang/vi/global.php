@@ -36,6 +36,7 @@ return [
     "room_image" => "Ảnh phòng",
     "district_id" => "Khu vực phòng",
     "code" => "Mã số",
+    "two_factor_code" => "Mã xác thực",
     "hot_id" => "Cờ nỗi bật",
     "exist" => "Cờ tồn tại",
     "status_id" => "Cờ hiển thị",

@@ -1,7 +1,7 @@
 <template>
     <thead>
     <tr>
-        <th v-for="(item, key) in listThead" :key="key" :class="{'w-1': key === 'id', 'w-5': key === 'button'}" v-html="item"></th>
+        <th v-for="(item, key) in listThead" :key="key" :class="{'w-1': key === 'id', 'w-5': key === 'button', 'd-none': key === 'image'}" v-html="item"></th>
     </tr>
     </thead>
 </template>

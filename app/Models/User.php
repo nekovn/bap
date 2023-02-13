@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Enums\CodeDefine;
 use App\Enums\DefaultDefine;
 use App\Notifications\Admin\TwoFactorCode;
 use Illuminate\Auth\MustVerifyEmail;
@@ -16,8 +17,9 @@ class User extends Authenticatable implements CanResetPassword
     use AuthenticationModelTrait;
     use MustVerifyEmail, Notifiable;
 
-    protected $guarded = ['created_at', 'updated_at'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = ['id', 'code', 'full_name', 'gender', 'birthday', 'address', 'phone', 'email', 'password', 'two_factor_code', 'two_factor_expires_at',
+        'is_block', 'remark', 'remember_token', 'email_verified_at', 'uuid', 'is_delete', 'created_by', 'updated_by'];
+    protected $hidden = ['remember_token', 'email_verified_at', 'two_factor_expires_at'];
     protected $casts = ['email_verified_at' => 'datetime', 'two_factor_expires_at' => 'datetime'];
     protected $appends = ['button'];
     protected $primaryKey = 'id';
@@ -63,5 +65,26 @@ class User extends Authenticatable implements CanResetPassword
     {
         $this->uuid = Str::uuid();
         $this->save();
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(CodeValue::class, 'gender', 'key')
+            ->select(['key', 'value'])
+            ->where('code_id', CodeDefine::CODE_GENDER);
+    }
+
+    public function isBlock()
+    {
+        return $this->belongsTo(CodeValue::class, 'is_block', 'key')
+            ->select(['key', 'value'])
+            ->where('code_id', CodeDefine::CODE_BLOCK);
+    }
+
+    public function isDelete()
+    {
+        return $this->belongsTo(CodeValue::class, 'is_delete', 'key')
+            ->select(['key', 'value'])
+            ->where('code_id', CodeDefine::CODE_DELETE);
     }
 }

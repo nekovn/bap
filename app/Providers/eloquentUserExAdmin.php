@@ -36,7 +36,8 @@ class eloquentUserExAdmin extends EloquentUserProvider
        //$user->menuAuths = [];
        return $this->newModelQuery($model)
                 ->where($model->getAuthIdentifierName(), $identifier)
-                ->where('is_unusable', FlagDefine::OFF)
+                ->where('is_block', FlagDefine::OFF)
+                ->where('is_delete', FlagDefine::OFF)
                 ->first();
     }
 

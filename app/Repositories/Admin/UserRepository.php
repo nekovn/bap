@@ -17,7 +17,7 @@ class UserRepository
 
     public function getModel()
     {
-        return $this->setModel()::where([]);
+        return $this->setModel()::where([])->with('gender', 'isBlock', 'isDelete');
     }
 
 

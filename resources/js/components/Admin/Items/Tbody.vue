@@ -55,28 +55,31 @@ export default {
         const showTbody = (value, column) => {
             let xhtml = '';
             let className = '';
-            switch (column && value[column]) {
-                case 'is_block':
-                case 'is_delete':
-                case 'exist_id':
-                    className = (value[column]['key']).toString() === '0' ? 'bg-success' : 'bg-danger';
-                    xhtml += showStatusText(className, value[column], value['id']);
-                    break;
-                case 'status_id':
-                case 'hot_id':
-                    className = (value[column]['key']).toString() === '0' ? 'bg-secondary' : 'bg-warning';
-                    xhtml += showStatusText(className, value[column], value['id']);
-                    break;
-                default:
-                    if (typeof  value[column] === 'string' || typeof  value[column] === 'number') {
-                        xhtml += showTextContent( value[column]);
-                    } else if (typeof  value[column] === 'object' && value[column] && value[column]['value']) {
-                        xhtml += showTextContent(value[column]['value']);
-                    } else if (typeof value[column] === 'object' && value[column]?.length) {
-                        xhtml += showListContent(value[column]);
-                    }
-                    break;
+            if (value[column]) {
+                switch (column) {
+                    case 'is_block':
+                    case 'is_delete':
+                    case 'exist_id':
+                        className = (value[column]['key']).toString() === '0' ? 'bg-success' : 'bg-danger';
+                        xhtml += showStatusText(className, value[column], value['id']);
+                        break;
+                    case 'status_id':
+                    case 'hot_id':
+                        className = (value[column]['key']).toString() === '0' ? 'bg-secondary' : 'bg-warning';
+                        xhtml += showStatusText(className, value[column], value['id']);
+                        break;
+                    default:
+                        if (typeof  value[column] === 'string' || typeof  value[column] === 'number') {
+                            xhtml += showTextContent( value[column]);
+                        } else if (typeof  value[column] === 'object' && value[column] && value[column]['value']) {
+                            xhtml += showTextContent(value[column]['value']);
+                        } else if (typeof value[column] === 'object' && value[column]?.length) {
+                            xhtml += showListContent(value[column]);
+                        }
+                        break;
+                }
             }
+
             return xhtml;
 
 
