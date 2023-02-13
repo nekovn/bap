@@ -2,7 +2,7 @@
     <div class="d-flex">
         <template v-for="(val,key) in list" :key="key">
             <!-- tel -->
-            <input type="tel" :maxlength="val.length" :class="item.class" :name="val.name" :aria-label="name" :value="value?.split('-')[key]"/>
+            <input type="tel" :maxlength="val.length" :class="item.class" :name="val.name" :aria-label="name" :value="value?.split('-')[key] || ''"/>
             <!-- ハイフン -->
             <img alt="hyphen" aria-label="hyphen" src="/assets/img/hyphen.svg" width="10" v-if="key < (list.length-1)">
         </template>
