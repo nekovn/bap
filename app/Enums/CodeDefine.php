@@ -21,6 +21,9 @@ final class CodeDefine extends Enum implements DefineInterface
     CONST CODE_GENDER = 107;
     CONST CODE_DELETE = 108;
     CONST CODE_BLOCK = 109;
+    CONST GUEST_USER = 1; //Đọc dữ liệu
+    CONST BASIC_USER = 2; //Nhập dữ liệu
+    CONST ADVANCED_USER = 5; //Quản lý dữ liệu
 
 
     public static function getKeyValue(): array

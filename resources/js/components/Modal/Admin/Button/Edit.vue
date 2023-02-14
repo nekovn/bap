@@ -38,7 +38,6 @@ export default {
             const newData = getSelectedValue(idElm);
             //変更済データ取得
             let {updatedData, isSame} = compareData(newData, oldData);
-            console.log(isSame);
             //削除済ID
             let deleteFile = [];
             //追加済画像ファイル

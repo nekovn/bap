@@ -24,8 +24,8 @@ trait BaseRepositoryTrait
         try {
             DB::commit();
             if (Auth::check()) {
-                $values['created_by'] = Auth::user()->name;
-                $values['updated_by'] = Auth::user()->name;
+                $values['created_by'] = Auth::user()->full_name;
+                $values['updated_by'] = Auth::user()->full_name;
             }
             return $this->getModel()->create($values);
         } catch (\Exception $exception) {
@@ -56,7 +56,7 @@ trait BaseRepositoryTrait
         DB::beginTransaction();
         try {
             if (Auth::check()) {
-                $values['updated_by'] = Auth::user()->name;
+                $values['updated_by'] = Auth::user()->full_name;
                 $values['updated_at'] = now();
                 //ログインしたユーザーのuuidを変更する
                 Auth::user()->updateUuid();

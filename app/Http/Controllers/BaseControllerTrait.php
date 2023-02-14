@@ -36,12 +36,20 @@ trait BaseControllerTrait
      */
     protected function getListContainer($conditions)
     {
-        //結果
-        $result = $this->service->findItem($conditions);
-        //キャッシュに既存
-        $this->container->setContainer($this->screen, $result, $result['data']);
-        //キャッシュからデータ取得
-        return $this->container->getContainer($this->screen);
+        $dataCache = $this->container->getContainer($this->screen);
+        //存在すれば、すぐに取得する
+        if ($dataCache) {
+            return $dataCache;
+        } else {
+            //存在しない時はDB取って、キャッシュ設定する
+            //結果
+            $result = $this->service->findItem($conditions);
+            //キャッシュ設定
+            $this->container->setContainer($this->screen, $result, $result['data']);
+            //結果データ取得
+            return $result;
+        }
+
     }
 
 

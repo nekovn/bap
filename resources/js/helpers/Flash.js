@@ -64,31 +64,34 @@ const compareData = (newData, oldData) => {
         for (let i = 0; i < lengthNewData; i++) {
             const key = keysNewData[i];
             const oldValue = oldData[key];
-            if (typeof oldValue === 'object') {
-                if(!oldValue.length) {
-                    arrayOldData[key] = oldValue?.key;
+            //元データ！＝＝null
+            if (oldValue) {
+                if (typeof oldValue === 'object') {
+                    if(!oldValue.length) {
+                        arrayOldData[key] = oldValue?.key;
+                    }
+                } else {
+                    arrayOldData[key] = oldValue;
                 }
-            } else {
-                arrayOldData[key] = oldValue;
-            }
-            //input、radio、selectの時
-            if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString()) {
-                //更新データ設定
-                updatedData[key] = newData[key];
-                //新データと元データを比べて変更したので、フラグ:false
-                isSame = false;
-            }
-            //checkboxの時
-            if (typeof oldValue === 'object' && !oldValue?.key) {
-                //選択データ比較
-                let compareCheckbox = diffArrayCheckbox(newData[key], oldValue);
-                //違うデータがあれば、
-                if (compareCheckbox.length) {
+                //input、radio、selectの時
+                if (arrayOldData[key] !== undefined && arrayOldData[key].toString() !== newData[key].toString()) {
+                    //更新データ設定
+                    updatedData[key] = newData[key];
                     //新データと元データを比べて変更したので、フラグ:false
                     isSame = false;
                 }
-                //すべてcheckedデータを取得する
-                updatedData[key] = newData[key];
+                //checkboxの時
+                if (typeof oldValue === 'object' && !oldValue?.key) {
+                    //選択データ比較
+                    let compareCheckbox = diffArrayCheckbox(newData[key], oldValue);
+                    //違うデータがあれば、
+                    if (compareCheckbox.length) {
+                        //新データと元データを比べて変更したので、フラグ:false
+                        isSame = false;
+                    }
+                    //すべてcheckedデータを取得する
+                    updatedData[key] = newData[key];
+                }
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class LogInfo extends Model
 {
@@ -40,6 +41,9 @@ class LogInfo extends Model
             'file_line' => $method . "_" . $line,
             'screen' => $region,
         ];
+        //createした後
         self::create($values);
+        //キャッシュ削除
+        Cache::forget($region);
     }
 }
