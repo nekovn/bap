@@ -82,6 +82,7 @@ class Room extends Model
 
     public function image()
     {
+        //hasMany: can not select namespace
         return $this->hasMany(RoomImage::class, 'room_id', 'id');
     }
 

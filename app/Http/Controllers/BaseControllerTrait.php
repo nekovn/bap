@@ -70,7 +70,8 @@ trait BaseControllerTrait
             'isActions' => $this->isActions,
             'router' => $this->router,
             'defaultSort' => $this->defaultSort,
-            'uuid' => SystemHelper::getUUid()
+            'uuid' => SystemHelper::getUUid(),
+            'roles' => SystemHelper::getRoles()
         ];
         $this->data['attribute'] = SystemHelper::encrypt(json_encode($attrs), config('app.secret'));
     }

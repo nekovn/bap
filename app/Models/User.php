@@ -18,7 +18,7 @@ class User extends Authenticatable implements CanResetPassword
     use MustVerifyEmail, Notifiable;
 
     protected $fillable = ['id', 'code', 'full_name', 'gender', 'birthday', 'address', 'phone', 'email', 'password', 'two_factor_code', 'two_factor_expires_at',
-        'is_block', 'remark', 'remember_token', 'email_verified_at', 'uuid', 'is_delete', 'created_by', 'updated_by'];
+        'permissions', 'is_block', 'remark', 'remember_token', 'email_verified_at', 'uuid', 'is_delete', 'created_by', 'updated_by'];
     protected $hidden = ['remember_token', 'email_verified_at', 'two_factor_expires_at'];
     protected $casts = ['email_verified_at' => 'datetime', 'two_factor_expires_at' => 'datetime'];
     protected $appends = ['button'];
@@ -65,6 +65,10 @@ class User extends Authenticatable implements CanResetPassword
     {
         $this->uuid = Str::uuid();
         $this->save();
+    }
+
+    public function permissions() {
+        return $this->belongsTo(Permission::class, 'permissions', 'id');
     }
 
     public function gender()

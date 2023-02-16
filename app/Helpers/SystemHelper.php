@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use App\Enums\DefaultDefine;
 use App\Models\LogInfo;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Services\LocalFileUploadService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -90,6 +92,23 @@ class SystemHelper implements SystemHelperInterface
     static function getUUid(): string
     {
         return Auth::check() ? Auth::user()->uuid : '';
+    }
+
+    /**
+     * 権限取得する
+     * @return array
+     */
+    static function getRoles(): array
+    {
+        if (Auth::check()){
+            $permissionId = Auth::user()->permissions;
+            $permission = Permission::find($permissionId);
+            $role = $permission->roles()->get()->toArray();
+            //['SELECT', 'INSERT', 'UPDATE', 'DELETE']
+            return count($role) ? array_column($role, 'name') : [];
+        } else {
+            return [];
+        }
     }
 
     /**

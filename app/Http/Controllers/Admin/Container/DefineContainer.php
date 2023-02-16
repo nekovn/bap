@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Container;
 
 use App\Enums\CodeDefine;
 use App\Models\Code;
+use App\Models\Permission;
 use App\Models\Utilities;
 
 class DefineContainer implements DefineInterface
@@ -149,6 +150,20 @@ class DefineContainer implements DefineInterface
                     'maxlength' => '200',
                     'control' => [],
                     'title' => __('global.remark'),
+                    'isCreate' => true,
+                    'isEdit' => true
+                ],
+                'permissions' => [
+                    'form' => 'select',
+                    'type' => '',
+                    'placeholder' => __('placeholder.permissions'),
+                    'value' => ['code_value' => Permission::GetPermission()],
+                    'class' => 'form-select',
+                    'required' => true,
+                    'disabled' => false,
+                    'maxlength' => '',
+                    'control' => [],
+                    'title' => __('global.permissions'),
                     'isCreate' => true,
                     'isEdit' => true
                 ],

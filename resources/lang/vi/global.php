@@ -39,6 +39,7 @@ return [
     "two_factor_code" => "Mã xác thực",
     "hot_id" => "Cờ nỗi bật",
     "exist" => "Cờ tồn tại",
+    "permissions" => "Quyền quản trị",
     "status_id" => "Cờ hiển thị",
     "created_by" => "Tạo bởi",
     "created_at" => "Ngày tạo",

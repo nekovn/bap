@@ -14,6 +14,7 @@ return [
   'description' => 'Nhập mô tả',
   'price' => 'Nhập giá phòng',
   'acreage' => 'Nhập diện tích',
+  'permissions' => "Chọn quyền quản trị",
   'utility_room' => "Nhập tiện ích phòng",
   'space_room' => "Nhập không gian phòng",
   'space_share' => "Nhập không gian chung",

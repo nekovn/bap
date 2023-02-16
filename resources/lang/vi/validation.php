@@ -160,6 +160,7 @@ return [
         'utility_room'     => 'Tiện ích phòng',
         'space_room'       => 'Không gian phòng',
         'space_share'      => 'Không gian chung',
+        'permissions'      => 'Quyền quản trị',
 
     ],
 
