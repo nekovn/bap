@@ -4,7 +4,8 @@
     @include('admin.layouts.header-tag')
     <link rel="stylesheet" href="{{ mix('/assets/css/app.css') }}">
     @routes
-    <script src="{{ mix('/assets/js/app.js') }}" defer></script>
+    <script src="{{ mix('/assets/js/app.js.br') }}" defer type="text/javascript"
+            integrity="{{ \App\Helpers\SystemHelper::file_integrity('/assets/js/app.js') }}"></script>
     @inertiaHead
 </head>
 <body>
