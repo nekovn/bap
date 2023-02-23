@@ -143,4 +143,11 @@ class SystemHelper implements SystemHelperInterface
         }
         return $arrImg;
     }
+
+    static function file_integrity($file): string
+    {
+        $path = public_path($file);
+        $hash = base64_encode(hash_file('sha256', $path, true));
+        return "sha256-$hash";
+    }
 }

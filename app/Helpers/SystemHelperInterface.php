@@ -47,4 +47,11 @@ interface SystemHelperInterface
      * @return array
      */
     static function handleFileUpload(array $files): array;
+
+    /**
+     * ファイルの SHA-256 ハッシュを計算する
+     * @param $file
+     * @return string
+     */
+    static function file_integrity($file): string;
 }
