@@ -272,9 +272,8 @@ const renderBorderInvalid = (inputELm = null, idELm = null, validName = null, is
                 }
             }
         }
-    } else {
-        isRemove ? inputELm?.classList.remove('is-invalid') :inputELm?.classList.add('is-invalid');
     }
+     isRemove ? inputELm?.classList.remove('is-invalid') :inputELm?.classList.add('is-invalid');
 }
 
 /**
