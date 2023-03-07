@@ -19,3 +19,16 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+ # gzip対応
+<IfModule mod_deflate.c>
+    <FilesMatch "\.(js|css)$">
+        SetOutputFilter DEFLATE
+        Header set Content-Encoding gzip
+    </FilesMatch>
+    <FilesMatch "\.(js|css)\.gz$">
+        AddEncoding gzip .gz
+        Header set Content-Encoding gzip
+    </FilesMatch>
+    Header append Vary Accept-Encoding env=!dont-vary
+</IfModule>
