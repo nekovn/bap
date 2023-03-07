@@ -34,6 +34,7 @@ class Cors
             ->header('x-content-type-options:', 'nosniff')//iframe削除、Clickjacking防止
             ->header('x-xss-protection:', '1; mode=block')//Cross-Site Scripting (XSS)攻撃防止
             ->header('X-Powered-By', 'Secret')//PHP/7.4.30非表示
-            ->header('pragma', 'no-cache');//具体的な指定
+            ->header('pragma', 'no-cache')//具体的な指定
+            ->header('cache-control', 'max-age=31536000');//具体的な指定
     }
 }
